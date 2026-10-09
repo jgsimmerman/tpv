@@ -1,0 +1,93 @@
+{
+  "edition": "0.3",
+  "date": "2026-10-09",
+  "files": [
+    {
+      "filename": "TPV_Dissertation_Research_Monograph_2026(1).pdf",
+      "sha256": "4e45854af8b69d8b3702c330f49241be3a68e204399d052e4e3d41448e7bcba0",
+      "size_bytes": 910193,
+      "library_file_id": "libfile_a7ecc5f4620c8191ad9cafd0a4dd58f8",
+      "role": "supplemental source"
+    },
+    {
+      "filename": "tpv_common_kernel_d5_manuscript(1).tex",
+      "sha256": "a4f39ae3d07a747b668ef4286a207ac919684b9936a3abfff5704d54c69406d7",
+      "size_bytes": 40279,
+      "library_file_id": "libfile_1463cf77a34081919be88cfc7d4c6603",
+      "role": "byte-identical duplicate of existing D5 source"
+    },
+    {
+      "filename": "mainTPV_curvature_strain_principal_symbol_results_20261009(1).json",
+      "sha256": "ce0ebf20bf268fa13aa136994777775f37d9d77377c4b0c5e5bdaa3c71575906",
+      "size_bytes": 4419,
+      "library_file_id": "libfile_a40bd913ce3c81918a633787a9601859",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_curvature_strain_principal_symbol_audit_20261009(1).py",
+      "sha256": "c62990268c5af8c453ffc08de4df01925f68f8d6784c1fa57472846d4f31ee6b",
+      "size_bytes": 6824,
+      "library_file_id": "libfile_bce9e916605081919b95b51c6c2a494a",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_geometric_locking_covariant_completion_checkpoint_20261009(1).md",
+      "sha256": "f98ec7633de6a60cbb54541556bb497c79155c4178413f986a0851df9283d18d",
+      "size_bytes": 9666,
+      "library_file_id": "libfile_63e8d72e90248191b17b8e4112dcad90",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_tensor_spectral_parent_results_20261009(1).json",
+      "sha256": "91e340f1d93f31cc75aa296b43d5b09635df139c0dd83d7a5409c6d31b242664",
+      "size_bytes": 1971,
+      "library_file_id": "libfile_b7d3354d66988191a0002f1af3d2b375",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_tensor_spectral_parent_audit_20261009(1).py",
+      "sha256": "a0e3fed173d960071890ee6abee6331510d6949b4a36927f9f52c1c44ea445e2",
+      "size_bytes": 4558,
+      "library_file_id": "libfile_3c4609b211e48191886c84194f53640f",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_D5_tensor_spectral_parent_checkpoint_20261009(1).md",
+      "sha256": "7f18996c489c4318527005844b5eacca64487722f4156267f09b98f39237886e",
+      "size_bytes": 7085,
+      "library_file_id": "libfile_d60a1aca8e288191a8056651d8101f9f",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_nonlinear_sGB_scan_results_20261009(1).json",
+      "sha256": "227dc499ea4b04b7cdf48d68f99f58d8c69b64907a1e41a4a098e188e486470c",
+      "size_bytes": 20665,
+      "library_file_id": "libfile_19b1fc5aad508191b3effeae76e678a4",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_nonlinear_sGB_research_checkpoint_20261009(1).md",
+      "sha256": "b76e12f78a74beca8ae2f45397028c4a16cc11bb89e35bda1ba4360b0291275d",
+      "size_bytes": 5382,
+      "library_file_id": "libfile_a5dfa0c90f78819192f102ed0c9e3246",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    },
+    {
+      "filename": "mainTPV_nonlinear_sGB_scan_20261009(1).py",
+      "sha256": "54a6d59fd8cccd9811414a56c773da1099149159adc08404d8115d90f07e4d10",
+      "size_bytes": 5176,
+      "library_file_id": "libfile_6fa8deb143a881918cd2e2bfd114327b",
+      "role": "version 0.3 checkpoint source; original bytes preserved"
+    }
+  ],
+  "dependencies": [
+    {
+      "filename": "mainTPV_coupled_throat_auxiliary_BVP_results_20261009.json",
+      "sha256": "fdfa413222311c930dc0611a6720f184b26f73013ab174290f559cd51c6224bb",
+      "size_bytes": 5485,
+      "library_file_id": "libfile_0abe45285cfc8191b705ab5e772bfc37",
+      "version_id": "1",
+      "role": "fixed-reference auxiliary BVP output used as input; its original computation was not rerun"
+    }
+  ]
+}

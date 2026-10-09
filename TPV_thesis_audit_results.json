@@ -1,0 +1,50 @@
+{
+  "strong_coupling": {
+    "A": "662262/1315237",
+    "c2": "-18574/1315237",
+    "decimal": -0.01412216961657861
+  },
+  "kernel": {
+    "K": 0.8848760848828522,
+    "correlation_lengths": [
+      12.863242020936333,
+      18.191371322095662
+    ],
+    "no_fold_polynomial": [
+      1,
+      -2.3720499999999998,
+      2.45735
+    ],
+    "discriminant": -4.202778797500001
+  },
+  "auxiliary": {
+    "energy": -5.653363241438638,
+    "probabilities": [
+      0.9928354587822938,
+      0.007099642503187326,
+      6.489871451904455e-05
+    ]
+  },
+  "mixed_shell": {
+    "positive_if_norm2_below": 0.42700349255696,
+    "negative_if_norm2_above": 1.3586474763176,
+    "degree19_bound": 2.2339230053870515e-06,
+    "degree29_bound": 3.3388914567189092e-09
+  },
+  "rotation": {
+    "lambda_km2": 0.08427013634908062,
+    "delta_I_km3": 0.011253572498188194,
+    "fraction": 0.00011970515394395485
+  },
+  "memory": {
+    "residues": [
+      0.5714285714285714,
+      0.42857142857142855
+    ],
+    "mass2": 3.5
+  },
+  "illustrative_radiation": {
+    "force_N": 0.000237,
+    "minimum_massless_radiation_power_W": 71050.812546
+  }
+}

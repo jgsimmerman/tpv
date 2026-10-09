@@ -1,0 +1,103 @@
+{
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0"
+  },
+  "method": "Preserved scripts executed with only /mnt/data rerouted; fixed-reference dependency not rederived.",
+  "source_sha256": {
+    "mainTPV_curvature_strain_principal_symbol_audit_20261009(1).py": "c62990268c5af8c453ffc08de4df01925f68f8d6784c1fa57472846d4f31ee6b",
+    "mainTPV_tensor_spectral_parent_audit_20261009(1).py": "a0e3fed173d960071890ee6abee6331510d6949b4a36927f9f52c1c44ea445e2",
+    "mainTPV_nonlinear_sGB_scan_20261009(1).py": "54a6d59fd8cccd9811414a56c773da1099149159adc08404d8115d90f07e4d10"
+  },
+  "checks": {
+    "mainTPV_curvature_strain_principal_symbol_audit_20261009(1).py": {
+      "assertions": "passed",
+      "numeric_values": 89,
+      "max_absolute_difference": 0.0
+    },
+    "mainTPV_tensor_spectral_parent_audit_20261009(1).py": {
+      "assertions": "passed",
+      "numeric_values": 38,
+      "max_absolute_difference": 0.0
+    },
+    "mainTPV_nonlinear_sGB_scan_20261009(1).py": {
+      "runs": 30,
+      "event_counts": [
+        18,
+        0,
+        2,
+        0,
+        10
+      ],
+      "event_order": [
+        "low_lapse",
+        "small_radius",
+        "scalar_amplitude",
+        "high_lapse",
+        "radial_matrix"
+      ],
+      "max_endpoint_rho_difference": 0.0,
+      "max_local_throat_residual": 1.5543122344752192e-15,
+      "max_sampled_constraint": 0.00034249677275288715,
+      "symbolic_throat_equations_independent_of_d": true,
+      "solver_success_is_terminal_event_not_global_solution": true
+    }
+  },
+  "scan_by_eta": [
+    {
+      "eta": 0.0,
+      "c": 0.6993291898120864,
+      "events": [
+        8,
+        0,
+        2,
+        0,
+        0
+      ],
+      "rho_range": [
+        5.661473744085852,
+        6.747059706007807
+      ],
+      "max_sampled_constraint": 0.00034249677275288715
+    },
+    {
+      "eta": 0.05,
+      "c": 1.506472723097353,
+      "events": [
+        10,
+        0,
+        0,
+        0,
+        0
+      ],
+      "rho_range": [
+        5.7918135844913765,
+        5.871659051658614
+      ],
+      "max_sampled_constraint": 6.313032216986869e-07
+    },
+    {
+      "eta": 0.1,
+      "c": 2.5301288211304773,
+      "events": [
+        0,
+        0,
+        0,
+        0,
+        10
+      ],
+      "rho_range": [
+        0.6232159535130026,
+        3.0025382659605353
+      ],
+      "max_sampled_constraint": 1.4506278123160854e-12
+    }
+  ],
+  "cross_checkpoint": {
+    "conditional_flare": 0.07630500000000001,
+    "previous_Kretschmann_lock_high_gradient_coefficient": -6.015238775873293,
+    "scope": "Same reduced ultrastatic homothetic calibration; not the nonlinear EsGB action."
+  },
+  "scope": "Restricted script reproduction; no independent full field-equation, global BVP or Lorentzian stability validation."
+}

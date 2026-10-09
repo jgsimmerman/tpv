@@ -1,0 +1,2040 @@
+\documentclass[11pt,oneside]{report}
+\usepackage[a4paper,margin=27mm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,bm,booktabs,longtable,array}
+\usepackage{microtype,graphicx,xcolor,fancyhdr,fvextra}
+\usepackage[unicode,colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,citecolor=blue!45!black]{hyperref}
+\usepackage{enumitem}
+\hypersetup{pdftitle={Tensor Polarizable Vacuum: A Critical Research Synthesis},pdfauthor={Jacob G. Simmerman},pdfsubject={Consolidated research draft, 9 October 2026}}
+\setlist{itemsep=3pt,topsep=5pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{1em}
+\setlength{\emergencystretch}{3em}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Tensor Polarizable Vacuum}\fancyhead[R]{\small Research synthesis}\fancyfoot[C]{\thepage}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\MP}{M_{\mathrm P}}
+\newcommand{\lp}{\ell_{\mathrm P}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\Spin}{\operatorname{Spin}}
+\newcommand{\src}[1]{\par\noindent{\small\textit{Research source:} \path{#1}}\par}
+\newcommand{\monosrc}[1]{\par\noindent{\small\textit{Research source:} \path{TPV_Dissertation_Research_Monograph_2026(1).pdf}, #1.}\par}
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{remark}[proposition]{Remark}
+\begin{document}
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\centering
+\vspace*{18mm}
+{\Huge\bfseries Tensor Polarizable Vacuum\par}
+\vspace{8mm}
+{\Large Spacetime Constitution, Active Gravitational Response,\par
+Topological Matter, and the Standard Model Problem\par}
+\vspace{18mm}
+{\Large Jacob G. Simmerman\par}
+\vspace{5mm}
+{\large A thesis-style synthesis of the TPV research program\par}
+\vfill
+{\large Consolidated research draft, version 0.3\par}
+{\large Source cutoff: 9 October 2026\par}
+\vspace{8mm}
+\begin{minipage}{0.85\textwidth}\small
+Prepared from retrieved research manuscripts, exported conversations, numerical checkpoints, and code. This is a critical research synthesis, not an awarded dissertation or a claim that TPV has been experimentally established. The document distinguishes exact statements, conditional calculations, historical claims, and unfinished work. AI-assisted compilation and selected computational rechecks are disclosed in the provenance chapter.
+\end{minipage}
+\end{titlepage}
+\pagenumbering{roman}
+\hypersetup{pageanchor=true}
+\chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
+The Tensor Polarizable Vacuum (TPV) program asks whether spacetime can be understood as a dynamical constitutive vacuum whose localized quantum states account for matter and whose long-wavelength dynamics recover general relativity and the Standard Model. Its defining premise is that the vacuum is spacetime itself. This manuscript consolidates mathematically distinct research branches and evaluates their proposed connections.
+
+On an invertible metric-induced constitutive subspace, TPV is an exact reformulation of general relativity with no new observables. A physically active branch adds a phenomenological matter-gated magnetic-Weyl interaction, $\lambda\Gamma B_{\mu\nu}B^{\mu\nu}$, treated on the perturbative GR-connected effective-field-theory branch. Its static purely electric sector is unchanged. An off-shell rotational audit corrects the local source and gives a conditional positive moment-of-inertia shift. A self-adjoint boundary identity explains why the interior correction can leave the exterior projection unchanged. A frozen-fluid transverse-traceless calculation has positive energy and a nonnegative spectrum, without establishing unrestricted metric--fluid well-posedness.
+
+The microscopic branch investigates electromagnetic localization, geometric geons, common spectral response, and topological quantization. A bounded kernel and quartic activation law pass reduced screens. A geometric lock is positive in a restricted radial-shape model but can lose positivity under covariant completion. A nonlinear scalar--Gauss--Bonnet control matches local throat equations, yet all 30 reproduced outward integrations terminate before establishing the intended exterior. A stable three-dimensional geon and its physical fermionic configuration space remain unconstructed.
+
+Conditional $\Spin(10)$ lattice and auxiliary models yield exact representation-theoretic results, including a corrected string coefficient and explicit gauge-emergence obstructions. A metric-affine trace-curvature candidate supplies one Abelian connection. Positive quadratic auxiliary parents illustrate causal memory; for the common kernel, one tested kinetic placement violates positive spectral weight while a complementary placement has a positive mode-sector realization. A complete covariant tensor parent is still missing.
+
+The synthesis does not establish a unified microscopic TPV action, chiral Standard Model matter, or a converged active merger. Laboratory analyses supply Maxwell-stress and Casimir scales, a specified metric-source obstruction, and a candidate electromagnetic extension, without explaining claimed anomalies. Throughout, exact statements, conditional models, reproduced calculations, historical results, and open problems are distinguished.
+
+\chapter*{Reading guide}\addcontentsline{toc}{chapter}{Reading guide}
+Chapters 1--3 define the evidential standard, ontology, and exact GR interpretation. Chapters 4--6 develop the active gravitational effective theory and its stellar and merger applications. Chapters 7--9 follow microscopic localization, geometric locking, nonlinear throat continuation, topology, flavor, and torsion. Chapters 10--12 examine the lattice, gauge-emergence, metric-affine, and causal spectral-parent branches. Chapters 13--14 reconcile the anomaly questions and summarize the surviving architecture. The appendices contain executable checks, selected original audit listings, and a source map.
+
+The word ``derived'' is reserved for a conclusion following from stated assumptions. It does not mean that those assumptions have themselves been derived from TPV. ``Reproduced'' means a named computation was rerun for this edition. ``Reported'' means the result occurs in a retrieved record but was not independently rerun here. A positive reduced stability test is not a proof of stability of the full field theory.
+\tableofcontents
+\clearpage\pagenumbering{arabic}
+
+\chapter{Scope, provenance, and the research question}
+\section{A unification problem with several levels}
+TPV has both an interpretive and a constructive ambition. The interpretive ambition is to express geometry in constitutive terms: clocks, light cones, and electromagnetic response characterize the state of spacetime. The constructive ambition is considerably stronger: identify quantum states of that same spacetime that behave as massive, chiral, interacting particles. Between these objectives lies a third question, whether a controlled tensor constitutive correction generates an observable departure from GR.
+
+These questions must not be conflated. A change of variables in the Einstein action establishes the first without establishing the second or third. A healthy higher-curvature effective interaction can establish a conditional low-energy model without proving microscopic matter emergence. A representation of $\Spin(10)$ can organize one fermion generation without providing a spacetime mechanism that produces it.
+
+The manuscript therefore treats TPV as a research program with a common ontology and several candidate realizations. A single parent theory unifying those realizations has not been specified. New mechanisms are not excluded merely because they lack a published precedent. They must nevertheless pass mathematical consistency, recovery of established physics, and empirical tests.
+
+\section{The retrieved corpus}
+The retrieval pass downloaded 692 selected files. Bytewise SHA-256 comparison found 616 distinct contents. This count includes code, tables, versions of manuscripts, checkpoint notes, pasted research text, and exported conversations; it is not a count of independent scientific results. Exact duplicates remain represented in the inventory so that the original provenance is not lost.
+
+The corpus includes exported files named \path{tpv-chat.pdf} and \path{tpv-chat-2.pdf} through \path{tpv-chat-10.pdf}; multiple copies have identical bytes. It also includes \path{mainTPV.pdf}, \path{mainTPVprint.pdf}, \path{cTPV7print.pdf}, the v3.x topological-fermion manuscripts, the active-TPV manuscripts, and the October 8--9 audit sequence. Filename numbering is not treated as a reliable substitute for conversation date or internal chronology.
+
+This edition is \emph{not a certification that every message in every research chat has been recovered}. Complete exports for all later TPV, cTPV, aTPV, and electrogravity conversations were not established in this retrieval. Available historical context helps locate gaps but cannot replace original equations, numerical outputs, or code. The manuscript draws on the retrieved mathematical records and explicitly limits sections for which the original record is incomplete. The companion inventory lists every downloaded file and its hash; the source archive preserves distinct contents. Some large code/data packages are preserved as archives, not exhaustively executed or scientifically validated.
+
+\subsection{Version 0.2 supplement and reconciliation}
+Version 0.2 incorporated the supplied research monograph, especially Chapters 5--12 and its audit appendix. The separately attached D5 TeX manuscript is byte-identical to the common-kernel manuscript already used. It supplies no independent new result. The original 692-file inventory remains unchanged; a supplemental manifest records the attachments and their hashes, and the package preserves their original bytes.
+
+The additions concern the interior/exterior rotational distinction, covariant variation and surface charges, scalar-PV and relativistic Plummer benchmarks, quantitative laboratory scales, inverse metric sourcing, and a proposed electromagnetic EFT extension. The supplementary monograph's Table 11.1 labels its frequencies as ratios to discrete GR frequencies, although the printed values match the archived code's continuum normalization. The discrete baseline was recomputed and the numerical table corrected rather than copying the label. The monograph's conservative statements about unfinished full-field validation are retained alongside the earlier source-generator convergence evidence; neither is used to erase the other's narrower result.
+
+\subsection{Version 0.3 checkpoint integration}
+Three additional October 9 checkpoint bundles, each containing a research note, Python script, and JSON results, are integrated in this edition. They cover geometric locking and covariant-completion tests; the D5 throat source and common-kernel spectral parent; and nonlinear scalar--Gauss--Bonnet continuation. The last script depends on an earlier fixed-reference auxiliary BVP results file, which was retrieved separately and is preserved in the package's dependencies directory.
+
+The updates are reconciled as distinct conditional models. The angular-curvature lock, Kretschmann completion, elementary physical-polarization propagators, and nonlinear scalar--Gauss--Bonnet control do not become one derived TPV theory merely by sharing reduced radius or kernel parameters. Their assumptions, source requirements, and validation scopes are stated separately. The original inventory is retained; the supplemental manifest records the new inputs without inflating the count of original distinct source contents.
+
+\section{Rules for reconciling conflicting records}
+Chronological recency alone does not prove correctness. A later record is preferred when it supplies an explicit correction, independent reconstruction, or narrower valid scope. Four examples are central:
+\begin{enumerate}
+\item The off-shell rotational action must be varied before imposing the GR rotation equation. A later four-dimensional check demonstrates that prematurely imposing the equation changes the local source.
+\item Haar channel weights in the lattice calculation are probabilities; treating them as amplitudes changes the sign of the leading string correction.
+\item A depth-two sixth-order calculation omits third-excitation-shell contributions. It cannot be labeled the complete sixth-order coefficient.
+\item Unreduced frame topology and algebraic curvature capacity do not establish physical fermions or propagating gauge bosons after constraints and gauge reduction.
+\end{enumerate}
+Earlier claims are retained as part of the research history when needed to explain the correction, but are not silently promoted into conclusions.
+
+\section{Computational status of this edition}
+The local TT spectrum at 800 interior points, the local-Gauss counterexample, the 270-row Berry Jacobian certificate, and the 64-component affine Hessian were rerun successfully. A new compact audit separately rechecks the rational second-order coefficient, common-kernel value, no-fold discriminant, auxiliary eigenvector probabilities, sixth-order sign thresholds, rotational arithmetic, and two-vector Schur complement.
+
+The archived normalization script required SymPy, which was unavailable during the original build. Its rational coefficient was independently reproduced using Python's exact \texttt{Fraction} arithmetic; this is not reported as a successful rerun of the entire archived script. The full stellar source generator, historical geon solvers, all higher-order recouplings, and a three-dimensional numerical-relativity evolution were not rerun. That distinction is maintained in the results ledger. SymPy was subsequently installed for the version 0.3 checkpoint reproduction; the earlier normalization-script run is still not retrospectively claimed as a pass.
+
+\subsection{Additional checks in version 0.2}
+The revision reruns the 800-point TT eigenproblem and compares it with the analytic eigenvalues of the same discrete Dirichlet operator. It independently recomputes the Maxwell-stress, ideal Casimir, Gaussian-shift matching, and low-momentum kernel scales. A finite-difference test checks the fixed-current density and velocity variation; a synthetic radial example checks the boundary-projection cancellation. The latter is not a rerun of the physical stellar boundary problem. The added program and results are supplied as \path{TPV_revision_audit.py} and \path{TPV_revision_audit_results.json}. The monograph's full curvature-derivative and metric-variation programs remain reported checks unless explicitly identified as rerun.
+
+\subsection{Additional checks in version 0.3}
+The locking and spectral-parent scripts were rerun with only output paths redirected: all assertions and all 89 and 38 numerical values matched. After recovering the auxiliary-data dependency, all 30 nonlinear stopping events and terminal radii also matched. A symbolic check confirmed that the four reflection-symmetric reduced throat equations are independent of $d$.
+
+These reproduce restricted calculations, not a full covariant TPV theory. The input auxiliary BVP was not rederived, and the separately reported collocation attempts were not rerun. The wrapper, dependency versions, source hashes, outputs, and complete scan table accompany this edition.
+
+\chapter{Spacetime as a constitutive vacuum}
+\section{Ontology and variables}
+A tensor constitutive state may be denoted $\mathcal C$. The intended relation is
+\begin{equation}
+\mathcal C\longmapsto g[\mathcal C],\qquad
+\text{localized states of }\mathcal C\longmapsto\text{candidate matter}.
+\end{equation}
+This is a statement of the desired ontology, not yet a unique mathematical definition. Writing $g_{\mu\nu}$ and an auxiliary polarization variable in the same action does not by itself violate the ontology: both may be coordinates on geometric state space. But it does create an obligation to identify the independent physical degrees of freedom and show which variables are constrained, redundant, or genuinely additional.
+
+A scalar ``vacuum density'' alone cannot encode a generic Lorentzian metric. An isotropic refractive index may describe a restricted optical geometry, while generic curvature involves anisotropy, magnetoelectric mixing, and causal structure. Tensor response is therefore natural at the level of representation. It is not a proof of new dynamics.
+
+We use signature $(-+++)$ unless explicitly working in a Euclidean algebraic audit. The reduced Planck normalization is $\MP^2=(8\pi G)^{-1}$ in units $c=\hbar=1$. Astrophysical calculations often use $G=c=1$ with lengths in kilometers. Microscopic reduced calculations quote lengths in $\lp$. The symbol $\Gamma(n)$ denotes the matter gate; the affine connection is written $\mathcal A^\lambda{}_{\rho\mu}$ to avoid confusing the two.
+
+\section{Electromagnetic constitution}
+Let $F$ be the electromagnetic two-form. Vacuum Maxwell theory is
+\begin{equation}
+\dd F=0,\qquad \dd H=J,\qquad H=\star_g F
+\end{equation}
+with conventional coupling factors absorbed into $H$. In components the metric-induced constitutive density can be written
+\begin{equation}
+\chi^{\mu\nu\rho\sigma}=\sqrt{-g}
+(g^{\mu\rho}g^{\nu\sigma}-g^{\mu\sigma}g^{\nu\rho}).
+\end{equation}
+This connects the constitutive language to curved-spacetime electromagnetism. The historical optical-medium representation is background literature, not a new TPV result.
+
+In four dimensions the Hodge star on two-forms is conformally invariant. Consequently it determines, subject to the usual metric-induced conditions and orientation choices, a conformal metric rather than its full scale. A volume form supplies the missing scale. The appropriate state for the exact-reformulation branch is therefore
+\begin{equation}
+\mathcal C=(\star_g|_{\Lambda^2},\epsilon_g).
+\end{equation}
+A general constitutive tensor has more freedom than a metric-induced one. Restriction to the metric-induced subspace is essential; arbitrary constitutive response can introduce birefringence or other structures absent from GR.
+
+\section{What the ontology does not determine}
+The ontology alone does not determine a coupling constant, particle mass, equation of state, nonlinear action, or quantum measure. Nor does calling a response ``polarization'' turn an auxiliary field into a propagating physical excitation. The program needs an action or other complete dynamical prescription, its constraints, observables, and a correspondence between microscopic and effective descriptions.
+
+An open-system formulation is possible if a subsystem exchanges energy and momentum with other geometric degrees of freedom. Openness does not eliminate the need to identify those degrees of freedom or to write the balance law for the enlarged system. Likewise, causal memory may arise by integrating out geometric modes, but causality and positive spectral weight are additional properties to prove.
+
+\chapter{The exact GR branch and the apparent-fluid branch}
+\section{Invertible constitutive reparametrization}
+Define
+\begin{equation}
+S_{\rm TPV}[\mathcal C,\Psi]=S_{\rm GR}[g[\mathcal C],\Psi].
+\end{equation}
+If $g\leftrightarrow\mathcal C$ is an invertible change of variables on the chosen state space, its variation is simply
+\begin{equation}
+\frac{\delta S_{\rm TPV}}{\delta\mathcal C^A}
+=\frac{\delta S_{\rm GR}}{\delta g_{\mu\nu}}
+\frac{\partial g_{\mu\nu}}{\partial\mathcal C^A}.
+\end{equation}
+On that subspace, the field equations, physical degrees of freedom, and observables are those of GR. This is a coherent constitutive interpretation. It does not explain the microscopic origin of the Einstein action and cannot predict a departure from it without changing the dynamics.
+
+A claim of observational novelty based only on interpreting the metric as vacuum polarization is therefore incorrect. A meaningful physical extension must supply an operator, state dependence, extra sector, or boundary condition that cannot be removed by the same invertible redefinition.
+
+\section{Scalar polarizable-vacuum benchmark and its limits}
+The Puthoff-inspired scalar constitutive ansatz uses
+\begin{equation}
+\epsilon=K\epsilon_0,\qquad\mu=K\mu_0,\qquad
+\dd s^2=-\frac{c^2\dd t^2}{K}+K(\dd x^2+\dd y^2+\dd z^2).
+\end{equation}
+The exponential choice $K=\exp[2GM/(rc^2)]$ supplies a restricted scalar metric family. The scalar ansatz ties lapse and spatial conformal factor together and cannot represent a general tensor constitutive geometry. Agreement at a given weak-field order must not be confused with an exact equivalence to every GR solution.
+
+A useful comparison fixes the Schwarzschild isotropic spatial factor $\psi=1+q/r$, where $q=GM/(2c^2)$. The scalar ansatz then requires $N_{\rm PV}=\psi^{-2}$, whereas the Schwarzschild lapse is $N_{\rm Schw}=(1-q/r)/(1+q/r)$. Their exact difference is
+\begin{equation}
+N_{\rm PV}-N_{\rm Schw}=\frac{q^2}{(r+q)^2}.
+\end{equation}
+Thus identical conformally flat spatial geometry does not imply identical spacetime. An inverse metric design must solve for the complete stress tensor required by both lapse and spatial geometry.
+\monosrc{Chapters 2 and 7}
+
+\section{Algebraic isotropic response and equation-of-state degeneracy}
+A separate historical branch used algebraic geometric response coupled to an isotropic perfect fluid. On a regular cold-barotropic branch, the resulting equations could be expressed using an apparent energy density and pressure and hence an apparent equation of state, $p_q(\epsilon_q)$. Comparisons at a fixed original EOS can show different stellar numbers, but those numbers alone do not distinguish a gravitational modification from a change of EOS within the mapped description.
+
+This result must be stated within its assumptions. It is not a theorem about every metric-affine theory or every matter sector. Multiple fluids, anisotropy, elasticity, dissipation, independent memory, and propagating constitutive states can invalidate the simple barotropic reduction.
+
+\section{Why an isotropic algebraic branch does not create shear}
+At a regular isotropic point, rotational covariance constrains an algebraic response to remain isotropic when the source is isotropic and the solution is locally unique. An anisotropic branch would require another physical direction, an anisotropic source, or a bifurcation where the response ceases to be locally invertible. Introducing a nonzero shear modulus by hand changes the theory.
+
+The historical tensor-elastic interpretation consequently requires care. A phenomenological elastic extension can have axial modes; that does not make those modes predictions of an algebraic perfect-fluid TPV action. A gate that lets a tensor wave speed tend to zero can also produce an infrared pathology and soft exterior-layer modes. Neither an arbitrary phase boundary nor a chosen finite shear modulus closes the derivation from the original action.
+
+\section{Physical mode counting}
+A four-dimensional metric has ten components, but GR does not have ten physical propagating modes. In canonical language, six spatial metric components and their momenta give twelve phase-space variables. Four first-class constraints remove eight, leaving four phase-space dimensions, or two configuration degrees of freedom.
+
+The Euclidean flat-space Hessian in ten metric components can have four gauge zero modes, five positive directions, and a negative conformal direction. This off-shell signature is not a list of Lorentzian particles. In particular, neither the ten components of $g_{\mu\nu}$ nor the ten algebraic components of electric and magnetic Weyl tensors establish an internal physical vector of $\SO(10)$.
+\src{mainTPV_metric_and_Berry_curvature_checkpoint_20261009.md}
+
+\chapter{A physically active magnetic-Weyl effective theory}
+\section{Action and the matter frame}
+The most developed active gravitational candidate in the retrieved records is
+\begin{equation}\label{eq:active}
+S=\frac{\MP^2}{2}\int\dd^4x\sqrt{-g}
+\left[R+\lambda\Gamma(n,s)B_{\mu\nu}B^{\mu\nu}\right]+S_{\rm fluid},
+\qquad \lambda=\frac{\alpha_B}{\Lambda_Q^2},
+\end{equation}
+where
+\begin{equation}
+B_{\mu\nu}={}^\star C_{\mu\alpha\nu\beta}u^\alpha u^\beta,
+\qquad J^\mu=\sqrt{-g}\,n u^\mu.
+\end{equation}
+The matter velocity comes from the physical fluid, not an independently postulated aether. A Brown-type variational fluid formulation provides a suitable current and constraint structure \cite{Brown}. The magnetic Weyl tensor is spatial, symmetric, and trace-free with respect to $u^\mu$.
+
+The benchmark gate uses the fluid energy density $e$ and pressure $p$:
+\begin{align}
+\Gamma&=\exp\left\{-\ln2\left[
+(\mathcal D_-/\mathcal D)^{0.4}+(\mathcal D/\mathcal D_+)^{0.4}
++(\zeta_\star/\zeta)^4\right]\right\},\\
+\mathcal D&=(8\pi e)^4(p/e)^3,
+\qquad \zeta=\frac{(1-3p/e)^2}{1+3(p/e)^2}.
+\end{align}
+The stated scales are $\mathcal D_-=10^{-11}\,\mathrm{km}^{-8}$, $\mathcal D_+=5\times10^{-9}\,\mathrm{km}^{-8}$, $\zeta_\star=0.08$, and $\Lambda_Q^2=0.059333\,\mathrm{km}^{-2}$. This is a phenomenological constitutive choice. A microscopic derivation and data-driven determination of its parameters are absent.
+
+\section{Effective rather than unrestricted higher-derivative dynamics}
+Curvature-squared interactions can yield higher-time-derivative equations. The retained effective branch is defined perturbatively:
+\begin{equation}
+\Phi=\Phi_0+\lambda\Phi_1+O(\lambda^2),\qquad
+E_0[\Phi_0]=0,\qquad DE_0[\Phi_0]\Phi_1=-E_B[\Phi_0].
+\end{equation}
+This procedure excludes additional high-frequency solutions not continuously connected to the GR solution within the perturbative expansion. The general logic is reduction of order \cite{ParkerSimon}. It does not prove that the unrestricted covariant theory is fundamental, unitary, or strongly hyperbolic.
+
+A source can contain high derivatives of the background even though the unknown correction is acted upon by the ordinary linearized operator. Consequently derivative bounds, smoothness, constraint propagation, and the accuracy of numerical background derivatives still matter. Small $\alpha_B$ alone is not an EFT validity criterion.
+
+\section{Current variation and Noether identity}
+At fixed metric,
+\begin{equation}
+\delta n=-\frac{u_\mu\delta J^\mu}{\sqrt{-g}},\qquad
+\delta u^\mu=\frac{(\delta^\mu{}_{\nu}+u^\mu u_\nu)\delta J^\nu}{\sqrt{-g}\,n}.
+\end{equation}
+Let $I_B=\int\sqrt{-g}\,\Gamma B^2$ and define
+\begin{equation}
+\delta I_B=\int\dd^4x\left[\frac{\sqrt{-g}}2K^{\mu\nu}\delta g_{\mu\nu}+q_\mu\delta J^\mu\right]
++\text{boundary terms}.
+\end{equation}
+Because $J^\mu$ is a vector density of weight one, its Lie derivative includes the density term:
+\begin{equation}
+\mathcal L_\xi J^\mu=\xi^\nu\partial_\nu J^\mu-J^\nu\partial_\nu\xi^\mu+J^\mu\partial_\nu\xi^\nu.
+\end{equation}
+Integration by parts gives
+\begin{equation}\label{eq:ward}
+\nabla_\mu K^\mu{}_{\nu}
+=j^\rho(\partial_\rho q_\nu-\partial_\nu q_\rho)
++q_\nu\nabla_\rho j^\rho,\qquad j^\mu=J^\mu/\sqrt{-g}.
+\end{equation}
+For a conserved current the last term vanishes. Entropy variation adds its corresponding Euler derivative when entropy is an independent variable.
+
+Writing $P_\nu=\partial B^2/\partial u^\nu$, the fluid kernel is
+\begin{equation}
+q_\kappa=-\Gamma_{,n}B^2u_\kappa+
+\frac{\Gamma}{n}(\delta^\nu{}_{\kappa}+u^\nu u_\kappa)P_\nu.
+\end{equation}
+The fixed-current metric variation must also account for density, normalization of $u$, metric contractions, and curvature. Varying only the explicit curvature is incomplete.
+
+\section{Fixed-current metric variation and local curvature checks}
+At fixed densitized current $J^\mu$, the normalized fluid variables vary as
+\begin{equation}
+\delta n=-\frac n2(g^{\rho\sigma}+u^\rho u^\sigma)\delta g_{\rho\sigma},
+\qquad
+\delta u^\mu=\frac12u^\mu u^\rho u^\sigma\delta g_{\rho\sigma}.
+\end{equation}
+These identities follow from $n=\sqrt{-g_{\mu\nu}J^\mu J^\nu}/\sqrt{-g}$; the revision's finite-difference test reproduces both. They do not license independent unconstrained variations of $n$ and $u^\mu$. The fluid's labels and multipliers must still be included in the complete action.
+
+In a local comoving orthonormal frame, with the metric and frame held fixed,
+\begin{equation}
+B_{ij}=\frac12\epsilon_i{}^{kl}C_{klj0},\qquad
+\delta(B_{ij}B^{ij})=B^{ij}\epsilon_i{}^{kl}\delta R_{klj0}.
+\end{equation}
+The associated $P^{abcd}=\partial(\Gamma B^2)/\partial R_{abcd}$ must have the Riemann symmetries. Its local algebraic derivative is only one ingredient of the covariant Euler derivative: double covariant derivatives, contractions, Hodge dual, Weyl trace subtractions, the normalized current, and the gate also contribute.
+
+The supplementary monograph reports a maximum normalized curvature-derivative discrepancy of about $7.3\times10^{-11}$ over 100 algebraic perturbations. In a separate illustrative metric variation at fixed lowered Riemann tensor and current, its complete algebraic derivative is $-6.54009\times10^{-8}$ while an isolated determinant/density/frame contribution is $+4.93862\times10^{-8}$. These are reported diagnostic values in the test's units, not stellar observables. They show why neither positivity of $B^2$ nor one partial variation determines the sign of the complete source.
+
+For stationary axisymmetric conserved circular flow, the temporal and azimuthal components of the current Ward identity can vanish kinematically. Testing only those components is insufficient. Radial and polar components and the appropriate rotational order, boundary conditions, and matter equations must be addressed in a production calculation.
+\monosrc{Chapter 10}
+
+\section{The recorded source-generator correction}
+The earlier source implementation combined a direct lowered-Riemann metric derivative with a derivative-commuted curvature formula. Those organizations cannot be mixed without consistently transferring curvature-commutator terms. The resulting Noether residual plateaued near $5.25\%$ under refinement, exposing an implementation error.
+
+A direct uncommuted organization defines
+\begin{align}
+P^{abcd}&=\frac{\partial L_B}{\partial R_{abcd}},\qquad
+D^{ab}=\frac1{\sqrt{-g}}\left[\frac{\partial(\sqrt{-g}L_B)}{\partial g_{ab}}\right]_{R,J},\\
+C^{ab}&=P^{(a|cde|}R^{b)}{}_{cde},\qquad W^{fbd}=\nabla_cP^{fbcd},\\
+T^{mn}&=\operatorname{Sym}_{mn}\left(\nabla_dW^{mnd}+\nabla_bW^{mbn}-\nabla_fW^{fnm}\right),\\
+E^{ab}&=D^{ab}+C^{ab}+T^{ab},\qquad K^{ab}=2E^{ab}.
+\end{align}
+The source note reports relative residuals $1.511\times10^{-3}$, $3.781\times10^{-4}$, $9.454\times10^{-5}$, and $2.364\times10^{-5}$ under successive factor-two refinement. That is a useful tested background, not an unrestricted proof. Later records still identify the complete coupled metric--fluid analysis as open. Both statements can be true: a correct identity and a convergent test do not exhaust every component and boundary condition of the production problem.
+\src{TPV_Noether_source_correction.md}
+\src{TPV_current_Ward_and_angular_action_checkpoint.md}
+
+\chapter{Static solutions, rotation, and local tensor stability}
+\section{An exact inactive sector}
+If $B_{\mu\nu}=0$ on a smooth background, then $B^2$ and its first variation vanish. A static perfect-fluid configuration aligned with its static congruence therefore remains a solution of the active theory, assuming a regular gate and consistent boundary conditions. The same argument applies to a strictly static purely electric tidal deformation.
+
+This statement does not imply that all perturbations have the GR spectrum. The second variation of $B^2$ need not vanish: rotation, time dependence, magnetic tides, and changes of the matter frame can activate it. It is also not a universal statement about every observer or every static matter flow.
+
+\section{A relativistic Plummer control and the need for finite support}
+An exact GR matter benchmark uses isotropic radius $r$ and
+\begin{equation}
+\dd s^2=-N^2c^2\dd t^2+\psi^4(\dd r^2+r^2\dd\Omega^2),\quad
+s=\sqrt{1+r^2/L^2},\quad\psi=1+\frac as,\quad N=\frac{s-a}{s+a}.
+\end{equation}
+The monograph records the perfect-fluid energy density and pressure
+\begin{align}
+\epsilon&=\frac{3c^4a}{2\pi GL^2(s+a)^5},\\
+p&=\frac{c^4a^2}{2\pi GL^2(s-a)(s+a)^5},\\
+\frac{c_s^2}{c^2}=\frac{\dd p}{\dd\epsilon}
+&=\frac{2a(3s-2a)}{15(s-a)^2}.
+\end{align}
+For $0<a<1$, the lapse is positive and the pressure finite and positive everywhere. Sound-speed bounds further restrict the parameter range; these local conditions are not a full radial-stability analysis. This family is a GR material source benchmark, not a new matter-free vacuum solution and not the same scalar lapse as $N=\psi^{-2}$.
+
+Its infinite tail matters for rotation. Since $\epsilon\sim r^{-5}$, the weak-field moment-of-inertia integral behaves as $\int\epsilon r^4\dd r\sim\int\dd r/r$ and diverges logarithmically. Uniform nonzero angular velocity extending to arbitrarily large radius also fails a physical subluminal-motion condition. A finite-support TOV star is therefore used for the rotational benchmark below; results from these two background families must not be mixed.
+\monosrc{Chapter 7}
+
+\section{Off-shell slow-rotation action}
+Use the Hartle form
+\begin{equation}
+\dd s^2=-N^2\dd t^2+A^2\dd r^2+r^2[\dd\theta^2+\sin^2\theta(\dd\phi-\omega\dd t)^2]
+\end{equation}
+and set $w=\Omega-\omega$, $j=(NA)^{-1}$. The GR axial operator is
+\begin{equation}
+\mathcal H[w]=(r^4jw')'+4r^3j'w.
+\end{equation}
+An independent Einstein--Hilbert plus Brown-fluid angular reduction gives
+\begin{equation}
+L_0^{(2)}=\int\dd r\left[\frac{r^4j}{12}w'^2-\frac{r^3j'}3w^2\right],\qquad
+\frac{\delta L_0^{(2)}}{\delta w}=-\frac16\mathcal H[w].
+\end{equation}
+The complete leading rotational Weyl reduction contains an off-shell term:
+\begin{align}
+F_{\rm off}[w]&=-\frac{w'}{2A^2}+
+\left(\frac{3m}{r^2}+4\pi rp\right)w\\
+&\quad+\frac r{4A^2}\left[w''+\left(\frac4r+\frac{j'}j\right)w'+\frac{4j'}{rj}w\right],\\
+Q[w]&=\int\dd r\frac{\Gamma Ar^2}{N}
+\left[\frac{w'^2}{A^2}+\frac83F_{\rm off}[w]^2\right],\\
+L_B^{(2)}&=\frac\lambda8Q[w],\qquad
+\mathcal H[w]=\frac{3\lambda}{4}\frac{\delta Q}{\delta w}.
+\end{align}
+For the dimensionless profile $w/\Omega$, the interaction instead carries the explicit factor $\Omega^2$. Mixing those normalizations would change units.
+
+The final bracket in $F_{\rm off}$ vanishes on a GR solution. Its \emph{variation} does not vanish there. Thus replacing $F_{\rm off}$ by its on-shell value before variation is not valid for obtaining the local source. The October 8 check reports opposite signs for the on-shell-substituted and four-dimensional directional derivatives at one test radius. Agreement of an integrated observable is not sufficient to excuse an incorrect local field equation.
+
+\section{Self-adjoint projection: different interiors, identical exterior coefficient}
+Write $F_{\rm on}$ for the first line of $F_{\rm off}$ and let
+\begin{equation}
+F_{\rm off}=F_{\rm on}+D\mathcal H[w],\qquad
+D=\frac{1}{4A^2r^3j},\qquad
+W=\frac{\Gamma Ar^2}{N},\qquad WD=\frac{\Gamma}{4r},
+\end{equation}
+where $j=(AN)^{-1}$. On a GR solution $w_0$, $\mathcal H[w_0]=0$. The difference of the first variations of the two quadratic functionals is
+\begin{equation}
+\left.\frac{\delta Q_{\rm off}}{\delta w}\right|_{w_0}
+-\left.\frac{\delta Q_{\rm on}}{\delta w}\right|_{w_0}
+=\frac43\mathcal H[\phi],\qquad
+\phi=\frac{\Gamma F_{\rm on}[w_0]}r,
+\end{equation}
+provided the integrations by parts have no endpoint contribution. This follows directly from the $F^2$ term: its variation changes by $(16/3)\int WD F_{\rm on}\mathcal H[\delta w]\dd r$, and $\mathcal H$ is formally self-adjoint.
+
+For $w=w_0+\lambda w_1$, the first-order source is $f_B=(3/4)\delta Q/\delta w$. The corrected and prematurely substituted sources differ by $\mathcal H[\phi]$. With the same regularity and external rotation conditions, their interior solutions can therefore differ by $\phi$. This generally nonzero interior difference must be retained in any local field equation.
+
+The Green identity makes the exterior consequence explicit:
+\begin{align}
+\mathcal H[w_0v]&=\frac1{w_0}(r^4jw_0^2v')',\\
+v'(r)&=\frac{\int_0^r w_0(s)f_B(s)\dd s}{r^4j(r)w_0(r)^2},\\
+\int_0^R w_0\mathcal H[\phi]\dd r
+&=\left[r^4j(w_0\phi'-w_0'\phi)\right]_0^R.
+\end{align}
+For regular central behavior and a gate whose relevant derivatives vanish at the surface, this boundary term is zero. In the stated normalization the exterior coefficient is $I_1=\frac16\int_0^R w_0f_B\dd r$; consequently the two sources have the same exterior moment-of-inertia projection despite different interior profiles. This is a restricted axial result. It does not establish equality of second-order quadrupoles, tidal sources, or general merger responses, and it fails as an argument if the required surface terms do not vanish.
+\monosrc{Sections 9.3--9.5}
+
+\section{The later conditional rotational benchmark}
+For the relativistic polytrope with $K=180\,\mathrm{km}^2$ and central rest-density variable $n_c=0.001\,\mathrm{km}^{-2}$, the record gives
+\begin{equation}
+M\simeq1.40089M_\odot,\quad R\simeq11.9206\,\mathrm{km},\quad
+I_{\rm GR}\simeq94.01076\,\mathrm{km}^3.
+\end{equation}
+For the normalized rotational profile, $Q=0.534166573628\,\mathrm{km}$. The restricted first-order axial projection gives
+\begin{equation}
+\Delta I=\frac\lambda4Q,
+\end{equation}
+so at $\alpha_B=0.005$,
+\begin{equation}
+\Delta I=0.011253572498\,\mathrm{km}^3,\qquad
+\frac{\Delta I}{I_{\rm GR}}=1.19705154\times10^{-4}.
+\end{equation}
+The arithmetic is reproduced in this edition. The underlying full radial/4D calculation is a retrieved result. Its conditional sign follows from the nonnegative integrand and coupling, within the stated fixed-family and charge interpretation. An unrestricted charge and second-order rotational-fluid audit remains necessary.
+\src{TPV_axial_action_projection_checkpoint_2026-10-08.md}
+
+\section{Smooth surface suppression and the asymptotic charge}
+For the finite polytrope $p=Kn^2$, $\epsilon=n+p$, the leading surface behavior in geometrized units is
+\begin{equation}
+n(r)\sim\frac{M}{2KR(R-2M)}(R-r),\qquad
+\mathcal D\propto(R-r)^7.
+\end{equation}
+The low-density factor in the specified gate therefore gives
+\begin{equation}
+\Gamma\sim\exp[-C(R-r)^{-14/5}],\qquad C>0.
+\end{equation}
+Extending this gate by zero outside the star suppresses it and its finite-order derivatives faster than every power at the surface. This supports the vanishing boundary term in the preceding axial identity and removes the direct additional curvature contribution to the Iyer--Wald angular-momentum charge at infinity. It does not set the total change in angular momentum to zero: the asymptotic frame-dragging metric can still change relative to GR.
+
+The distinction is between the explicit new-operator surface charge and the total physical charge of the perturbed solution. A complete Hamiltonian/Noether audit must still specify baryon-number, rotation, and matter constraints and agree with the four-dimensional field equations. Smooth suppression alone is not an independent proof of $\Delta I=\lambda Q/4$.
+\monosrc{Section 10.6}
+
+\section{Earlier stellar numbers and their disposition}
+The earlier unified manuscript reports the following smooth-SLy4 benchmarks:
+\begin{center}\begin{tabular}{lll}\toprule
+Quantity & Reported value & Coupling\\\midrule
+$R$ at $1.4M_\odot$ & $11.6269\,\mathrm{km}$ & GR background\\
+$I_{\rm GR}$ & $100.2907\,\mathrm{km}^3$ & GR background\\
+$\Delta I/I$ & $7.936\times10^{-4}$ & $\alpha_B=0.05$\\
+$\Delta Q/Q$ & $(1.066\pm0.005)\times10^{-3}$ & $\alpha_B=0.05$\\
+$\Delta\bar Q/\bar Q$ & $-5.21\times10^{-4}$ & $\alpha_B=0.05$\\
+$\Delta\sigma_{\rm irr}$ & $2.89598\,\mathrm{km}^5$ & $\alpha_B=0.01$\\\bottomrule
+\end{tabular}\end{center}
+These are historical conditional model calculations, not measurements. The off-shell correction does not by itself invalidate an exterior first-order inertia coefficient when the preceding boundary identity applies. Nevertheless, the different background and normalization, unrerun SLy4 calculation, and remaining second-order source checks prevent this synthesis from treating the entire table as independently validated final predictions. The different polytropic and SLy4 backgrounds must not be combined into a convergence sequence.
+\src{TPV_unified_manuscript.tex}
+
+\section{Frozen-fluid TT energy and dispersion}
+For a local flat matter-rest patch and one TT polarization, the quadratic Lagrangian is
+\begin{equation}
+\mathcal L^{(2)}=\frac{\MP^2}{4}\left[h_t^2-h_z^2+\lambda\Gamma(z)h_{tz}^2\right].
+\end{equation}
+With stationary prescribed gate,
+\begin{equation}
+[1-\lambda\partial_z(\Gamma\partial_z)]h_{tt}-h_{zz}=0.
+\end{equation}
+For constant gate the dispersion is
+\begin{equation}
+\omega^2=\frac{k^2}{1+\lambda\Gamma k^2},\quad
+v_{\rm ph}=(1+\lambda\Gamma k^2)^{-1/2},\quad
+v_{\rm g}=(1+\lambda\Gamma k^2)^{-3/2}.
+\end{equation}
+The conserved energy is proportional to
+\begin{equation}
+E=\int\dd z\,[h_t^2+h_z^2+\lambda\Gamma h_{tz}^2].
+\end{equation}
+For nonnegative $\lambda\Gamma$ and suitable boundary conditions it is nonnegative. The generalized eigenvalue quotient is
+\begin{equation}
+\omega^2=\frac{\int|h_z|^2\dd z}
+{\int|h|^2\dd z+\lambda\int\Gamma|h_z|^2\dd z}.
+\end{equation}
+The discretized mass matrix $M=I+\lambda D^T\Gamma D$ is bounded below by $I$. This is a positive-energy TT screen with a frozen matter state. It does not test fluid perturbations, lapse and shift constraints, vorticity, curved backgrounds, or unrestricted covariant characteristics.
+
+Using the TOV gate merely as a one-dimensional flat profile, the version 0.2 calculation uses $N_g=800$ interior points and $\Delta z=R/(N_g+1)$. The exact discrete GR reference is
+\begin{equation}
+\omega^{\rm GR}_{n,\mathrm{disc}}=\frac2{\Delta z}\sin\left[\frac{n\pi}{2(N_g+1)}\right].
+\end{equation}
+The rerun frequency ratios $\omega_n/\omega^{\rm GR}_{n,\mathrm{disc}}$ are
+\begin{center}\begin{tabular}{rrr}\toprule
+Mode & $\alpha_B=0.005$ & $\alpha_B=0.05$\\\midrule
+1&0.999108501&0.991142743\\
+2&0.995027224&0.952427564\\
+3&0.989774970&0.904505592\\
+4&0.982020768&0.843148269\\
+5&0.971745921&0.774327835\\\bottomrule
+\end{tabular}\end{center}
+The archived script and the previous edition instead divided by continuum $n\pi/R$. The supplementary monograph repeats those continuum-normalized values under a discrete-baseline label. The present table corrects that mismatch; the change is small but removes the known reference-grid dispersion. Both normalizations are retained in the revision audit output. These are not spherical stellar quasi-normal modes. Large high-mode shifts are not controlled EFT predictions unless $|\lambda\Gamma k^2|\ll1$.
+\src{TPV_tensor_stability_checkpoint_2026-10-09.md}
+
+\subsection{Gate derivatives and the limits of a radius-based EFT estimate}
+The monograph reports $\lambda\max|\Gamma''|\simeq0.2624$ at $\alpha_B=0.05$, compared with about $0.02624$ at $\alpha_B=0.005$. Its earlier reduced integral places about 39\% of its weight where $\lambda|\Gamma''|>0.1$ at the larger coupling. These reported diagnostics show why a small estimate based only on $R^{-2}$ can miss rapid variation of the gate. Reducing the coupling suppresses these first-order measures but does not prove full-system hyperbolicity, constraint propagation, or absence of extra modes outside the EFT branch.
+\monosrc{Chapter 11}
+
+\chapter{Strong-field dynamics and the merger program}
+\section{A tangent formulation}
+Let $Y$ contain the metric, gauge, and fluid variables. The proposed numerical evolution separates the GR trajectory and its first-order correction:
+\begin{equation}
+\dot Y_0=F_{\rm GR}(Y_0),\qquad
+\dot Y_1=DF_{\rm GR}[Y_0]Y_1+S_{\rm TPV}[Y_0].
+\end{equation}
+An analogous linearization applies to the initial-data constraints. A matrix-free Jacobian-vector product can be approximated by centered differences, but its step size must lie on a numerical plateau, and the perturbed residual must use consistent gauge and matter variables.
+
+For $h_{22}=A_0e^{-i\phi_0}[1+\lambda(a_1-i\phi_1)]$, the phase response is $\lambda\phi_1$. A response coefficient is meaningful only after waveform alignment, background error, extraction uncertainty, and resolution dependence are controlled.
+
+\section{Weyl reconstruction and validity monitors}
+The recorded 3+1 monitor reconstructs electric and magnetic Weyl components from spatial curvature, extrinsic curvature, and matter stress, then boosts them from the slice normal to the physical fluid frame. A representative measure is
+\begin{equation}
+\epsilon_{\rm curv}=|\lambda|\Gamma\sqrt{E_u^2+B_u^2}.
+\end{equation}
+Gate gradients and source derivatives require additional bounds. A small curvature measure cannot guarantee control at a thin interface with large derivatives. Weighted bad fractions distinguish a small numerical outlier from a region carrying a substantial part of the active source.
+
+The thresholds used in the historical study, such as $p_{99}(\epsilon)<0.03$ and a bad fraction below one percent for $\epsilon>0.1$, are operational working criteria. They are not universal EFT theorems. Their usefulness depends on including every relevant derivative scale and checking truncation error.
+
+\section{Shocks and the conservation requirement}
+A coupling-dependent shock position can make a pointwise derivative with respect to coupling distributional. The proposal therefore uses a short paired finite-coupling evolution through contact and returns to the tangent solution after a smooth remnant forms. This is a numerical strategy requiring validation, not an already completed binary calculation.
+
+If a regulator $W$ multiplies an effective stress $\tau^\mu{}_{\nu}$, the corresponding matter force must change as well:
+\begin{equation}
+\tau^\mu{}_{\nu,W}=W\tau^\mu{}_{\nu},\qquad
+f_{W,\nu}=Wf_\nu-\tau^\mu{}_{\nu}\nabla_\mu W.
+\end{equation}
+Then $\nabla_\mu\tau^\mu{}_{\nu,W}+f_{W,\nu}=0$ follows from the unregulated identity. This algebraic conservation property does not establish regulator independence. A regulator modifies the model in the region where it acts; the observable must become insensitive to a controlled range of physical regulator choices.
+
+\section{What the reduced data did and did not show}
+The earlier merger manuscript uses equatorial density data and a GR waveform, not a complete time history of the three-dimensional metric and extrinsic curvature. It reports a symmetry-corrected remnant pattern frequency around $1.34\,\mathrm{kHz}$ and a reduced predicted shift roughly $10^{-4}$--$4\times10^{-3}\,\mathrm{Hz}$ in magnitude at $\alpha_B=10^{-3}$, with negative sign within the tested model family.
+
+Those values are outputs of a calibrated remnant model. They are not a measured TPV effect, a full evaluation of the covariant source on a binary trajectory, or a converged active merger. In view of the later source audits, they are best retained as historical scale estimates and targets for reconstruction.
+
+A decisive result requires a constraint-consistent background, the complete covariant TPV source and matter force, stable order-reduced evolution, coupling linearity, spatial/time convergence, regulator control, and a nonzero observable larger than numerical uncertainty. The retrieved record does not establish either final merger success or a universal impossibility theorem.
+\src{TPV_merger_numerical_relativity.tex}
+\src{TPV_FUKA_helical_source_spec.md}
+\src{TPV_M1_tangent_Z4c_Valencia_spec.md}
+
+\chapter{Nonlinear electromagnetic localization and geometric particles}
+\section{Why a Hopfion is not yet a massive fermion}
+Linked electromagnetic field lines provide a natural topological motif. A finite-energy field configuration can carry helicity and angular momentum, but those properties alone do not imply a stable rest-frame localized particle, quantized electric charge, fermionic statistics, or chiral weak interactions.
+
+The classical Born--Infeld Hamiltonian in one common normalization is
+\begin{equation}
+\mathcal H_{\rm BI}=b^2\left[\sqrt{1+\frac{D^2+B^2}{b^2}
++\frac{(\bm D\times\bm B)^2}{b^4}}-1\right].
+\end{equation}
+For a null configuration with $D^2=B^2$ and $\bm D\cdot\bm B=0$, the square root is $1+D^2/b^2$, so $\mathcal H_{\rm BI}=D^2$. The null branch retains Maxwell-like energy. Therefore adding Born--Infeld nonlinearity does not automatically stabilize a scale deformation that remains null.
+
+Off-null anisotropic deformations may have a positive stiffness in a chosen family while an isotropic dilation remains unstabilized. This is why a positive quadrupolar Hessian is not enough. The full candidate must resist every physical instability, satisfy constraints, and admit a localized rest state.
+
+\section{Derrick scaling and what it proves}
+A recurring reduced energy is
+\begin{equation}
+E(\rho)=V\rho^3+K\rho+C\rho^{-1}+D\rho^{-3},
+\qquad V,K,C,D>0.
+\end{equation}
+It diverges at both ends and has a stationary scale obeying
+\begin{equation}
+3V\rho^6+K\rho^4-C\rho^2-3D=0.
+\end{equation}
+This establishes a minimum within the scaling family. It does not prove a stationary solution of the original PDE, positivity of the unconstrained fluctuation operator, or the physical origin of the coefficients. In particular, a positive higher-spatial-derivative stiffness term is a new dynamical assumption whose covariant completion must be audited.
+
+An attractive scalar response found by integrating out a stable quadratic variable has the generic form
+\begin{equation}
+\Delta E=-\frac12J^TK^{-1}J.
+\end{equation}
+For $K>0$ it is nonpositive. It cannot be relabeled a positive confinement barrier without another contribution. Several earlier stabilization arguments were narrowed by precisely this sign distinction.
+
+\section{Historical core models and their limitations}
+The v3.x manuscripts combine Hopf-like electromagnetic structure, constrained $\mathrm{SU}(5)/\mathrm{SO}(5)$ textures, topological parity, and internal collective coordinates. They are useful records of candidate construction, but the later ontology requires more than appending a separate core field to spacetime. The core must be derived as a physical spacetime state or explicitly acknowledged as an independent effective ingredient.
+
+Likewise, a winding frame rotation can leave curvature, torsion, and metric unchanged. If it is removable by local Lorentz gauge transformations, it does not create a physical particle. The relevant topology is that of physical configurations after constraints, gauge equivalence, boundary conditions, and diffeomorphisms have been imposed.
+
+\section{From binding energy to a one-ended geon}
+The later geometric branch emphasizes a one-ended localized state with a microscopic neck and controlled exterior null expansions. The change of criterion is significant: a large negative binding-energy estimate is not by itself a geometric construction, while an apparent throat condition is not by itself a stable particle. A common action must simultaneously satisfy the constraints, asymptotics, finite curvature, energy bookkeeping, and perturbative stability.
+
+The archived radial and projected calculations constitute tests of restricted ansatz families. Neither their throat terminology nor their association with a Dynkin label supplies an unrestricted three-dimensional solution. The next chapter states the surviving reduced construction without upgrading its status.
+\src{TPV_Z2_Topological_Fermion_Current_Model_v3_9_updated.pdf}
+\src{tpv-chat-3.pdf}
+\src{tpv_common_kernel_d5_manuscript.tex}
+
+\chapter{The common spectral kernel and reduced D5 geometry}
+\section{A positive bounded susceptibility}
+The later common-kernel model uses
+\begin{equation}\label{eq:kernel}
+K_\beta(z)=\int_1^2\dd\sigma\,6(\sigma-1)(2-\sigma)\frac{z}{z+\beta\sigma},\qquad \beta>0.
+\end{equation}
+The weight is nonnegative and integrates to one. For $z\ge0$, $0\le K_\beta(z)<1$, the derivative is positive, and the large-$z$ limit is one. The low-momentum expansion is
+\begin{equation}
+K_\beta(z)=\frac{9-12\ln2}{\beta}z+O(z^2).
+\end{equation}
+This replaces an earlier literal singular denominator with a bounded stationary susceptibility. A positive stationary spectral representation does not by itself specify a causal Lorentzian tensor projector or a quantum theory.
+
+For $\beta=0.05330497$, $z_D=0.613$, and $\ell_*=4.2\lp$, this edition reproduces
+\begin{equation}
+K_\beta(z_D)=0.8848760849,\qquad
+\frac{\ell_*}{\sqrt{2\beta}}=12.8632\lp,\quad
+\frac{\ell_*}{\sqrt{\beta}}=18.1914\lp.
+\end{equation}
+The response factors are calibrated as
+\begin{equation}
+R_2=1+\Delta_2G(q)K_\beta(z),\qquad
+R_0=1+\Delta_0G(q)K_\beta(z),
+\end{equation}
+with target values $R_2=2$ and $R_0=2.3$. These are reduced model parameters, not measured constants or independently derived Standard Model quantities.
+
+\subsection{The same kernel at laboratory wavelengths}
+The low-$z$ coefficient for the stated $\beta$ is $12.79869088$. Setting $z=(\ell_*/L)^2$ with $\ell_*=4.2\lp$ gives, at $L=1\,\mu\mathrm m$,
+\begin{equation}
+K_\beta[(\ell_*/L)^2]\simeq5.90\times10^{-56}.
+\end{equation}
+This is a dimensionless kernel response, not a complete force prediction. It nevertheless rules out assigning an order-one micron-scale response to this particular kernel without further physics. A proposed enhancement would need an independently specified long-range mode, resonance, or susceptibility and its consistent coupling. The reduced microscopic geon calculation supplies none of those laboratory ingredients by itself.
+\monosrc{Chapter 4}
+
+\section{A no-fold theorem for the reduced scalar state}
+Let
+\begin{equation}
+G_4(q)=\frac{q^4}{q^4+q_c^4},\qquad
+q=j[1+CG_4(q)],\quad C=1.45735,\quad q_c=0.589834.
+\end{equation}
+Solving for $j$ and writing $x=(q/q_c)^4$ gives
+\begin{equation}
+j(q)=\frac{q(1+x)}{1+(1+C)x}.
+\end{equation}
+Its derivative has the sign of
+\begin{equation}
+P(x)=1+(2-3C)x+(1+C)x^2.
+\end{equation}
+For the quoted $C$, the discriminant is approximately $-4.202779$ and the leading coefficient is positive. Hence $P(x)>0$ and the reduced state curve is monotone for $q\ge0$. This is a genuine statement about the specified algebraic law. It is not a proof of positivity of a dynamical scalar kinetic operator.
+
+\section{Reported geometric screens}
+At the reported radius $R_H=3.7436\lp$, the common-kernel manuscript records a positive reduced flare margin near $1.09\times10^{-2}\lp^{-2}$, no additional spherical exterior MOTS in the adopted barrier family, and no nearby low-angular-mode bifurcation in the tested projection.
+
+The preconditioned six-variable XCTS/Galerkin Jacobian in $(u_0,q_0,u_2,q_2,u_4,q_4)$ has reported eigenvalues
+\begin{equation}
+0.90664,\ 0.90664,\ 0.91007,\ 1.09106,\ 1.09106,\ 1.09453.
+\end{equation}
+A representative quadrupolar correction is $u_2\simeq-0.00730$. These are finite-dimensional screening results. Eigenvalues of a preconditioned projection are not the unrestricted PDE spectrum; a favorable projected condition number does not establish global existence or exclude higher angular instabilities.
+
+An assertion that $\theta_+>0$ for every exterior closed surface is much stronger than a spherical barrier or a low-mode test. The source explicitly leaves the unrestricted surface search and full three-dimensional constraint solution open. This edition preserves that distinction.
+
+\section{Radial energy and locking}
+The reduced Hopf contribution is $E_H=2/R$ in the chosen units. The longitudinal on-shell term has the form
+\begin{equation}
+E_L=-\frac{\gamma_L^2}{2}\sum_n\frac{|J_n(R)|^2}{\lambda_n(R)+m_L^2}.
+\end{equation}
+At the operating point the source reports $E_H\simeq0.53425$, $E_L\simeq-0.11726$, $(E_H+E_L)'\simeq-0.117659$, and $(E_H+E_L)''\simeq0.089073$. Positive curvature of the reduced energy is useful but the first derivative is not zero. An additional locking cost is required.
+
+An orientation-blind strain invariant is a candidate. The earlier collective normalization gives a scalar overlap $0.9241188$ and global binding threshold $\bar\kappa/A_H>0.0389100$. A linear spin-two overlap does not supply the same lock in the round limit because of angular orthogonality. A scalar/strain invariant remains a candidate; its coefficient and covariant physical origin are not derived.
+
+The required next calculation is joint, not sequential tuning: derive the lock and its forces from one action, solve the constraints with that source, verify the Noether identity, and test the physical Hessian. Calibrating a radial minimum first and subsequently inserting it into a geometry risks concealing incompatibility.
+\src{tpv_common_kernel_d5_manuscript.tex}
+
+\section{Geometric locking and its covariant-completion tests}
+\label{sec:geometric-lock}
+The October 9 geometric-locking checkpoint gives the earlier $R^{-2}$ proxy a conditional invariant interpretation. In a static spherical proper-radial metric,
+\begin{equation}
+\dd s^2=-N(\rho)^2\dd t^2+\dd\rho^2+R(\rho)^2\dd\Omega^2,
+\qquad Q_\Omega=\frac{1-(R')^2}{R^2}.
+\end{equation}
+$Q_\Omega$ is the angular sectional curvature; at a stationary areal sphere, $R'=0$, it equals $R^{-2}$. The orbit two-plane is geometrically distinguished in spherical symmetry. A generic nonspherical spacetime does not automatically select that plane, and the reported D5 radius has not been established as a stationary sphere of a complete constrained solution.
+
+\subsection{A positive local radial-shape model}
+Consider the conditional two-coordinate energy
+\begin{equation}
+E=E_0+\frac{k}{2}(s-s_{\rm ref})^2+
+\frac{\lambda_s}{2}(s-Q_\Omega)^2,
+\qquad k=\lambda_s=20.
+\end{equation}
+Here $s$ is an illustrative strain coordinate and $\lambda_s$ is unrelated to the stellar coupling $\lambda$. Its normalization and reference value are not derived from microscopic TPV. Using the reported $E_0'$ and $E_0''$ as local calibration data at $R_H=3.7436\lp$ gives
+\begin{align}
+Q_0&=0.0713544598324, &s_{\rm ref}&=0.380002464060,\\
+s_{\rm eq}&=0.225678461946, &s_{\rm eq}-Q_0&=0.154324002114.
+\end{align}
+The uniform Hessian in these reduced coordinates is
+\begin{equation}
+H_0=\begin{pmatrix}
+0.02384874579&0.76241542721\\
+0.76241542721&40
+\end{pmatrix},\qquad
+\operatorname{eig}H_0=(0.00931342936,40.0145353164).
+\end{equation}
+Positive eigenvalues here establish a minimum in the declared two-coordinate model; their magnitudes depend on coordinate normalization. They are not physical mode frequencies.
+
+Around a constant-radius ultrastatic cylinder, $R=R_H+\eta_r(\rho)$,
+\begin{equation}
+Q_\Omega=Q_0-\frac{2\eta_r}{R_H^3}
++\frac{3\eta_r^2}{R_H^4}-\frac{(\eta_r')^2}{R_H^2}+O(\eta_r^3).
+\end{equation}
+The resulting gradient coefficient is $G=2\lambda_s(s_{\rm eq}-Q_0)/R_H^2=0.4404682324$. With an assumed nonnegative strain-gradient cost $D(s')^2/2$, the Fourier-space Hessian is
+\begin{equation}
+H_\Omega(p)=H_0+\diag(Gp^2,Dp^2).
+\end{equation}
+For $D\ge0$ it is positive for all real $p$. The archived finite-difference spatial-energy checks at $D=1$ reproduce this quadratic form, and were rerun for this revision. Turning an integrated radial collective energy into a local density is an additional modeling step: these coefficients do not constitute a solved D5 perturbation operator. Constraints, lapse dynamics, angular perturbations, and global boundary conditions are absent.
+
+\subsection{A curvature scalar can change the high-gradient sign}
+For the ultrastatic spherical metric,
+\begin{equation}
+\mathcal K=R_{abcd}R^{abcd}
+=4\left[Q_\Omega^2+2\left(\frac{R''}{R}\right)^2\right].
+\end{equation}
+Replacing $Q_\Omega$ by $Q_K=\tfrac12\sqrt{\mathcal K}$ is therefore not an innocuous covariant completion. Around the constant-radius cylinder,
+\begin{equation}
+Q_K=Q_\Omega+(\eta_r'')^2+O(\eta_r^3),\qquad
+B_4=-2\lambda_s(s_{\rm eq}-Q_0)=-6.17296008455.
+\end{equation}
+The radial entry becomes $H_{K,11}=H_{0,11}+Gp^2+B_4p^4$. Its lowest eigenvalue crosses zero at $p=0.2974434937$ in the chosen inverse reduced length units. At that point $p\ell_*=1.24926$, so the crossing is not parametrically below the assumed nonlocal scale. This is a warning about this truncated static completion, not a physical ultraviolet instability threshold for TPV. With a nonconstant lapse, additional curvature terms enter; a square-root Kretschmann invariant also requires a domain and differentiability prescription in general Lorentzian geometry.
+
+At an ultrastatic flaring neck let $\xi=RR''\ge0$. Then $Q_K=\sqrt{1+2\xi^2}/R^2$. Calibrating the same radial force along a homothetic family at fixed $\xi$, and eliminating $s$ locally with $k_{\rm eff}=k\lambda_s/(k+\lambda_s)=10$, gives a positive highest-derivative coefficient only if
+\begin{equation}
+\xi^2(1+2\xi^2)>\frac{0.117659\,R_H^5}{4k_{\rm eff}},
+\qquad \xi>0.9052778273.
+\end{equation}
+This necessary sign test does not establish positivity of the full operator, even above the threshold.
+
+An alternative is to select an isolated eigenvalue of the curvature operator on bivectors. Near the cylinder the angular eigenvalue $Q_0$ is separated from five zero eigenvalues. A real isolated branch can be selected covariantly by its spectral projection locally, but maintaining that branch under general perturbations is another condition. The algebraic mixing matrix
+\begin{equation}
+\begin{pmatrix}Q_0&x\\x&0\end{pmatrix}
+\end{equation}
+has upper eigenvalue $Q_0+x^2/Q_0+O(x^4)$, yielding locking-energy Hessian
+\begin{equation}
+H_{xx}=\frac{2k_{\rm eff}(Q_0-s_{\rm ref})}{Q_0}=-86.51120195.
+\end{equation}
+This reproduced algebraic test does not demonstrate that $x$ is an allowed physical metric perturbation. It shows that covariance of the selected invariant alone is insufficient to prove positivity.
+\src{mainTPV_geometric_locking_covariant_completion_checkpoint_20261009(1).md}
+
+\subsection{What the common kernel can lock}
+If the only locking operator is $\lambda_s K_\beta(-\ell_*^2\partial_\rho^2)$, eliminating a positive auxiliary strain gives
+\begin{equation}
+k_{\rm eff}(p)=\frac{k\lambda_s K_\beta(\ell_*^2p^2)}{k+\lambda_s K_\beta(\ell_*^2p^2)}.
+\end{equation}
+Since $K_\beta(0)=0$, it supplies no homogeneous-cylinder locking stiffness by itself. This does not exclude a force on a nonuniform core with finite-momentum support. It requires that any additional local or background-dependent contribution be derived from the same action rather than appended to fit the missing force.
+
+\section{The conditional throat source and the unknown lapse}
+\label{sec:throat-source}
+The reduced exterior barrier is
+\begin{equation}
+f_{\rm red}(R)=\left(1-\frac{R_H}{R}\right)
+\left(1+a\frac{R_H}{R}\right),\qquad a=-0.84739.
+\end{equation}
+Interpreting it as $(\dd R/\dd\rho)^2$ of a time-symmetric spherical spatial metric gives
+\begin{equation}
+\xi=R_H R''_H=\frac{1+a}{2}=0.076305.
+\end{equation}
+This interpretation is a conditional geometric reconstruction; a barrier function is not by itself a complete one-ended spacetime. For a regular nonzero lapse and the orthonormal radial null vector $k^{\hat\mu}=(1,1,0,0)$, the throat requires
+\begin{equation}
+R_{kk}|_H=-\frac{2R''_H}{R_H}=-0.0108894041150\lp^{-2}.
+\end{equation}
+Thus vacuum equations written $G_{\mu\nu}+\Delta E_{\mu\nu}=0$ require $\Delta E_{kk}=+0.0108894041150\lp^{-2}$. This is a source target, not a derived microscopic TPV interaction. The existing regular matter-gated magnetic-Weyl operator alone cannot provide this static vacuum support: it is inactive in the stated static aligned frame and its gate vanishes in vacuum. Connecting the stellar and microscopic branches requires additional derived dynamics.
+
+In the ultrastatic control, Einstein-form bookkeeping gives
+\begin{align}
+8\pi G\rho_{\rm eff}&=+0.0604650557174\lp^{-2},\\
+8\pi Gp_{r,\rm eff}&=-0.0713544598324\lp^{-2},\\
+8\pi Gp_{t,\rm eff}&=+0.00544470205751\lp^{-2}.
+\end{align}
+These encode an anisotropic target Einstein tensor, not independent physical matter fields. The radial null combination is negative, while the tangential one is positive.
+
+Define $A=-R''_H/R_H$, $B=R_H^{-2}$, and $H_N=N''_H/N_H$. With the curvature convention used in the checkpoint,
+\begin{equation}
+E_{rr}=\frac{H_N+A-B}{3},\qquad
+E_{\theta\theta}=E_{\phi\phi}=-\frac12 E_{rr},\qquad
+C_{abcd}C^{abcd}=12E_{rr}^2.
+\end{equation}
+The magnetic Weyl tensor vanishes in the static frame. At constant lapse, $E_{rr}=-0.02559972063\lp^{-2}$ and $C^2=0.007864148356\lp^{-4}$. They are not lapse-independent predictions. For example, the trace equation of a vacuum local $R+c_C C^2$ action requires ${}^{(4)}R=0$, since its Bach contribution is trace-free. On this throat that condition gives $H_N=0.0604650557174\lp^{-2}$ and $C^2=0.00035573736594\lp^{-4}$. Choosing $H_N=0.0767991618899\lp^{-2}$ instead cancels the Weyl curvature at the point. Neither choice solves the remaining equations by itself; the unrestricted local Weyl-squared theory is not thereby validated as a healthy parent.
+
+Combining the inferred $\xi=0.076305$ with the preceding ultrastatic homothetic locking test gives a high-gradient coefficient $-6.015238776$. Under those shared assumptions this particular Kretschmann lock fails the necessary sign test. This comparison does not apply that coefficient to the distinct scalar--Gauss--Bonnet action below, nor does it establish an instability of a solved D5 geon.
+\src{mainTPV_D5_tensor_spectral_parent_checkpoint_20261009(1).md}
+
+\section{Nonlinear scalar--Gauss--Bonnet continuation control}
+\label{sec:sgb-control}
+The latest checkpoint tests a conditional Einstein--scalar--Gauss--Bonnet (EsGB) control with four positive-weight scalar response modes. In its reduced $8\pi G=1$ normalization,
+\begin{align}
+S&=\int\dd^4x\sqrt{-g}\left[\frac12\mathcal R
+-\frac12(\nabla\phi)^2-V(\phi)+f(\phi)\mathcal G\right]+S_b,\\
+f(\phi)&=c\phi+\frac d2(\phi-1)^2,\\
+V(\phi)&=V_H(7\phi^2-10\phi^3+4\phi^4)
++\eta\phi^2(\phi-1),\\
+S_b&=-\frac12\sum_{i=1}^4w_i\int\dd^4x\sqrt{-g}
+\left[(\nabla b_i)^2+m_i^2(\phi-b_i)^2\right].
+\end{align}
+$\mathcal R$ is the four-dimensional Ricci scalar and $\mathcal G$ the Gauss--Bonnet invariant. The $b_i$ discretize the common-kernel response, but are canonical scalar control fields. They have not been derived as intrinsic TPV geometric degrees of freedom or as a covariant spin-two sector. The continuum positive-parent calculation is discussed in Section~\ref{sec:spectral-parent}; sharing its spectral parameters does not identify the two theories.
+
+The radial lapse $L$ must be varied before imposing proper-radius gauge in
+\begin{equation}
+\dd s^2=-N^2\dd t^2+L^2\dd\rho^2+R^2\dd\Omega^2.
+\end{equation}
+The supplied script starts with the following reduced Lagrangian, up to the common angular normalization and boundary terms:
+\begin{align}
+\mathcal L_{\rm rad}={}&\frac{2RR'N'}{L}+\frac{N(R')^2}{L}+NL
+-NR^2\left[\frac{(\phi')^2}{2L}+LV\right]\nonumber\\
+&+\frac{8f_{,\phi}\phi'N'}{L}\left[1-\frac{(R')^2}{L^2}\right].
+\end{align}
+It generates equations for $N,L,R,\phi$, sets $L=1$ afterward, and adds the canonical auxiliary terms. Three equations determine radial accelerations and the fourth supplies the radial constraint. Reproducing this symbolic reduction and its integration is not an independent four-dimensional derivation of the control action's full perturbation theory.
+
+\subsection{Local calibration and fixed-reference auxiliary inputs}
+The supplied auxiliary inputs come from an earlier fixed-reference-background boundary-value calculation with profile width $10\lp$. The revision retrieves and preserves that required input file. Its four throat values and spectral parameters are
+\begin{center}\begin{tabular}{rrrr}\toprule
+$i$ & $m_i^2$ & $w_i$ & $b_i(0)$\\\midrule
+1 & 0.00323163449 & 0.06742581416 & 0.19750999956\\
+2 & 0.00401905416 & 0.43257418584 & 0.23128512485\\
+3 & 0.00504641693 & 0.43257418584 & 0.27038339258\\
+4 & 0.00583383660 & 0.06742581416 & 0.29721660409\\\bottomrule
+\end{tabular}\end{center}
+Mass-squared entries use the checkpoint's Planck-length units. These auxiliary throat values are held fixed across the new scan; the auxiliary fields themselves evolve with the metric and scalar afterward. They are not global boundary data solved anew on each evolved geometry.
+
+At $\phi_H=1$ with vanishing first derivatives, the inputs give $U_H=0.00126200740262$, $S_H=0.00338045691175$, and $V_H=R_H^{-2}-U_H=0.0700924524298$. Writing $B_H=8(1+\xi)/R_H^4$, local calibration uses
+\begin{equation}
+c=\frac{\eta+S_H+\sqrt{(\eta+S_H)^2+B_H\xi}}{2B_H},\qquad
+\phi''_H=-\frac{\xi}{4c},\qquad
+R''_H=\frac{\xi}{R_H},\qquad
+N''_H=-\frac{1+\xi}{R_H^2},
+\end{equation}
+with $N_H=1$. This lapse curvature is specific to the control's local equations and must not be replaced by the lapse choices of the Weyl-squared example.
+
+For a reflection-even throat, $f_{,\phi}(1)=c$ while contributions from $f_{,\phi\phi}=d$ vanish in the local equations when the first derivatives vanish. A separate symbolic check in this revision confirms that all four reduced throat equations are independent of $d$. Once $\phi'$ develops away from the throat, $d$ affects the continuation. Identical local matching therefore does not determine a common global exterior. Reflection parity alone also does not construct a one-ended topology.
+
+\subsection{Thirty reproduced outward integrations}
+The grid uses $\eta\in\{0,0.05,0.10\}$ and
+\begin{equation}
+d\in\{-2,-1,-0.5,-0.2,0,0.2,0.5,1,2,4\}.
+\end{equation}
+For each $\eta$, $c$ is recalibrated while $d$ leaves that local calibration unchanged. The supplied DOP853 integration uses relative tolerance $2\times10^{-8}$, absolute tolerance $2\times10^{-10}$, maximum step $0.06$, and a throat-series start at $\rho=10^{-4}$. The target outer endpoint is $\rho=45$, subject to event cutoffs.
+
+All 30 runs were rerun for this revision using the recovered auxiliary input. Their stopping-event assignments and terminal radii reproduce the supplied JSON exactly in this environment:
+\begin{center}\begin{tabular}{rrrrr}\toprule
+$\eta$ & $c$ & $N=0.02$ & $|\phi|=8$ & Radial matrix threshold\\\midrule
+0 & 0.69932919 & 8 & 2 & 0\\
+0.05 & 1.50647272 & 10 & 0 & 0\\
+0.10 & 2.53012882 & 0 & 0 & 10\\\midrule
+Total & & 18 & 2 & 10\\\bottomrule
+\end{tabular}\end{center}
+The radial-matrix event is a smallest singular value of $10^{-8}$ in the chosen acceleration-equation representation. Additional small-radius and high-lapse safeguards were not triggered. None reached the target endpoint or established an asymptotically flat exterior. The solver's \texttt{success=true} indicates successful event termination, not success of the intended global construction.
+
+The local throat residual is below $1.6\times10^{-15}$, yet the outward outcomes differ. At $\eta=0$, $d=0$, the low-lapse event occurs at $\rho=5.71078335$; at $\eta=0.10$, $d=0$, the radial-matrix event occurs at $\rho=2.82186174$. The two scalar-amplitude runs reach the largest sampled absolute constraint residuals, approximately $2.94\times10^{-4}$ and $3.42\times10^{-4}$. Their late-stage accuracy is degraded relative to the other cases. The complete event table is preserved in Appendix~\ref{app:checkpoint-results}.
+
+These are sampled residual diagnostics, not rigorous bounds along every trajectory or a demonstrated convergence order. The code samples a subset of accepted integration points; its reported minimum singular value need not coincide with the interpolated event endpoint. A low-lapse cutoff does not prove a horizon, and a static radial-matrix threshold does not establish Lorentzian loss of hyperbolicity. No continuation beyond these cutoffs is inferred.
+
+\subsection{What remains unsolved}
+The checkpoint also reports two attempts at a finite-interval, one-auxiliary collocation boundary-value problem with unknown coupling and potential parameters. Both encountered singular Jacobians and diverging iterates. The supplied scan script does not implement those attempts, so they remain reported results, not rerun validations. They neither prove nonexistence nor supply a converged solution; the four-auxiliary global boundary-value problem remains open.
+
+The next calculation must determine lapse, radius, scalar, and auxiliary profiles on the same geometry while imposing throat regularity and appropriate far-field decay. Continuation from a suitable smooth reference branch and properly scaled asymptotic boundary conditions are more informative than treating local throat calibration as completion. After a global solution is obtained, its constrained physical Hessian, Lorentzian principal symbol, and topology require separate analysis. The present 30-point grid establishes no successful exterior for this control and these inputs; it does not rule out all EsGB solutions or all TPV mechanisms.
+\src{mainTPV_nonlinear_sGB_research_checkpoint_20261009(1).md}
+\src{mainTPV_nonlinear_sGB_scan_20261009(1).py}
+\src{mainTPV_coupled_throat_auxiliary_BVP_results_20261009.json}
+
+
+\chapter{Topology, spin, chirality, flavor, and torsion}
+\section{Internal representation versus physical spin}
+The representation-theoretic identity
+\begin{equation}
+\mathbf{16}\big|_{\Spin(5)\times\Spin(5)}\simeq(\mathbf4,\mathbf4)
+\end{equation}
+organizes one internal spinor. The Clifford construction of 45 generators verifies a Lie algebra representation. It does not show that the physical spacetime spectrum contains that representation, that it is chiral, or that it has fermionic exchange statistics.
+
+The $D_5$ Dynkin algebra is $\mathfrak{so}(10)$. Quiver and binary-dihedral constructions provide mathematical relationships to that algebra. Identifying the quantum geon Hilbert space and Hamiltonian with the appropriate construction requires an explicit map of symplectic structure, constraints, boundary/framing data, and dynamics. Matching diagram labels is insufficient.
+
+\section{Configuration-space topology}
+For the pure-spinor orbit $\mathcal P=\SO(10)/U(5)$, the topology checkpoint states
+\begin{equation}
+\pi_1(\mathcal P)=0,\quad \pi_2(\mathcal P)=\mathbb Z,\quad
+\pi_3(\mathcal P)=0,\quad \pi_4(\mathcal P)=0.
+\end{equation}
+Thus this target alone does not provide a three-dimensional Skyrmion winding or a flat FR sign for based maps from $S^3$.
+
+For an independent physical $SU(2)\simeq S^3$ core,
+\begin{equation}
+\pi_3(S^3)=\mathbb Z,\qquad
+\pi_1\operatorname{Map}_{*,N}(S^3,S^3)=\pi_4(S^3)=\mathbb Z_2.
+\end{equation}
+This can support fermionic quantization in the appropriate sector, with rotation and exchange loops tied to winding parity. Configuration-space analysis of this kind has a developed literature \cite{AucklySpeight}; applying it to a physical TPV geon still requires the actual reduced configuration space.
+
+A conditional hedgehog $U=\cos f+i\hat x\cdot\sigma\sin f$ with $f=2\arctan[(L/r)^2]$ has winding one. For an assumed positive sigma-plus-Skyrme energy the recorded result is
+\begin{equation}
+E(L)=6\pi^2\sqrt2\,aL+\frac{45\pi^2\sqrt2}{8}\frac bL,
+\qquad L_*^2=\frac{15b}{16a}.
+\end{equation}
+It is a scaling minimum of an assumed physical core, not a derivation that a tetrad winding becomes matter.
+\src{mainTPV_spin10_geon_spin_statistics_checkpoint_20261008.md}
+
+\section{Generations and overlap models}
+The older flavor program investigated three internal bound states and overlap kernels rather than identifying generations with three unrelated topological charges. A schematic effective mass matrix is
+\begin{equation}
+(M_f)_{ij}=\int\dd\mu(q)\,\psi_i^*(q)\mathcal K_f(q)\psi_j(q).
+\end{equation}
+A point-supported kernel can be rank one; width and derivative corrections can lift its rank. Misalignment of different kernels can generate mixing. These mathematical mechanisms are useful, but fitting observed masses or choosing a kernel with the desired hierarchy is not a prediction of those masses.
+
+The retrieved tables cover rank lifting, two-kernel mixing, CP phases, $\mathbf{120}$ and $\mathbf{126}$ channels, and seesaw-like constructions. The missing common input is a derived physical collective Hamiltonian and its normalized states and couplings. Consequently no numerical CKM or PMNS matrix in the historical fitting records is presented here as a parameter-free TPV prediction. The source inventory preserves those tables for a later dedicated reconstruction.
+
+\section{ECSK and the Nieh--Yan candidate}
+The torsion branch asks whether a collective orientation coordinate can couple to axial spin through spacetime geometry. With tetrad $e^a$, connection $\omega^{ab}$, torsion $T^a$, and curvature $R_{ab}$, the Nieh--Yan form is
+\begin{equation}
+\mathcal N_{\rm NY}=T^a\wedge T_a-e^a\wedge e^b\wedge R_{ab}
+=\dd(e^a\wedge T_a).
+\end{equation}
+A constant coefficient is a boundary term. A dynamical coefficient can generate derivative couplings after torsion is eliminated; related canonical pseudoscalar constructions exist in the literature \cite{CalcagniMercuri}.
+
+The retrieved cTPV7 transcript proposes a periodic collective angle $\vartheta$ and a reduced Lagrangian
+\begin{equation}
+L_\vartheta=\frac12I_\vartheta\dot\vartheta^2
+-V_0(1-\cos4\vartheta)-c_5Q_5\dot\vartheta.
+\end{equation}
+Then
+\begin{equation}
+p_\vartheta=I_\vartheta\dot\vartheta-c_5Q_5,\qquad
+H_\vartheta=\frac{(p_\vartheta+c_5Q_5)^2}{2I_\vartheta}
++V_0(1-\cos4\vartheta).
+\end{equation}
+Momentum changes by multiples of four, so the rotor splits into four sectors modulo four. Orientation reversal exchanges the conjugate odd sectors. This is a conditional realization of a discrete structure by a continuous rotor; a $\mathbb Z_4$ label does not itself prove the existence of that coordinate or its inertia.
+
+The decisive microscopic integrals are
+\begin{equation}
+I_\vartheta=\left\langle\partial_\vartheta\Phi_{\rm geon},
+\mathcal G_{\rm fluct}\partial_\vartheta\Phi_{\rm geon}\right\rangle
+\end{equation}
+and the axial overlap determining $c_5$. They were not supplied by a complete physical geon in the retrieved material. Introducing a Dirac field to compute its axial torsion coupling also does not derive that Dirac field from spacetime. The mechanism may couple already-existing chiral matter; emergence remains a separate problem.
+\src{cTPV7print.pdf}
+\src{Pasted text(1).txt}
+
+\chapter{Conditional Spin(10) lattice and auxiliary calculations}
+\section{What has been assumed}
+A Kogut--Susskind Hamiltonian with $\Spin(10)$ links is a conventional gauge-theory starting point \cite{KogutSusskind}. It provides a precise mathematical laboratory for the proposed internal sector. It already assumes link variables, representation content, and local gauge structure; calculations within it cannot be used as evidence that those structures emerged from TPV geometry.
+
+In the stated normalization, a spinorial electric link excitation costs one unit and
+\begin{equation}
+H=H_E-x\sum_p[\chi_{16}(U_p)+\chi_{\overline{16}}(U_p)]
+\end{equation}
+uses unnormalized characters. Dividing a character by 16 changes the definition of $x$ and all perturbative coefficients. Such a convention change must be applied consistently before comparing records.
+
+\section{The Haar probability correction}
+For a normalized static spinor string on a shared link,
+\begin{equation}
+\Psi_0(U)=\sqrt{d_V}D^V_{mn}(U),\qquad d_V=16.
+\end{equation}
+One oriented plaquette insertion produces a state with norm one. If $V\otimes S=\bigoplus_RR$, the channel projector obeys
+\begin{equation}
+\Tr_S P_R=\frac{d_R}{d_V}I_V,\qquad
+p_R=\|P_R\Psi_1\|^2=\frac{d_R}{256}.
+\end{equation}
+The amplitude magnitude is $\sqrt{p_R}$. The second-order energy uses $p_R$, not $p_R^2$.
+
+The relevant channels and Casimirs are
+\begin{center}\begin{tabular}{rrrr}\toprule
+$R$ & $d_R$ & $C_2(R)$ & Fusion block\\\midrule
+$10$&10&$9/2$&$16\otimes16$\\
+$120$&120&$21/2$&$16\otimes16$\\
+$126$&126&$25/2$&$16\otimes16$\\
+$1$&1&0&$16\otimes\overline{16}$\\
+$45$&45&8&$16\otimes\overline{16}$\\
+$210$&210&12&$16\otimes\overline{16}$\\\bottomrule
+\end{tabular}\end{center}
+Each block has total dimension 256. With $C_2(16)=45/8$, the excitation gap is $D_R=2+C_2(R)/C_2(16)$. Exact arithmetic gives
+\begin{equation}
+A=\sum_R\frac{d_R/256}{D_R}=\frac{662262}{1315237}.
+\end{equation}
+Four transverse plaquettes per straight link yield the normalized coefficient
+\begin{equation}\boxed{
+c_2=4\left(\frac12-A\right)
+=-\frac{18574}{1315237}=-0.0141221696166.}
+\end{equation}
+The older probability-squaring error produced $+0.853666192759$. This is a real correction to the stated conditional model, not an interpretive disagreement. The negative coefficient is not proof of a continuum trajectory or deconfinement.
+\src{mainTPV_YangMills_normalization_and_continuum_checkpoint_2026-10-09.md}
+
+\section{Higher orders and missing shells}
+The independent mixed-pair reconstruction gives
+\begin{equation}
+T_{\rm mixed}=\frac{59732918064189539333}{462968176791292621449}
+\simeq0.12902164999370427,
+\end{equation}
+replacing the archived $0.12902146733888614$. The restored two-plaquette graph-character model has
+\begin{align}
+E_2&=-1.0070610848082895,\qquad E_4=-0.2820381709363831,\\
+E_6^{(\mathrm{depth}\,2)}&=+0.0980985500459735.
+\end{align}
+The superscript is indispensable. A positive third-shell electric Hamiltonian contributes
+\begin{equation}
+D_3=\langle P_3V\psi_2,H_{E,3}^{-1}P_3V\psi_2\rangle\ge0.
+\end{equation}
+After including two pure third-shell terms, the recorded full pair expression is
+\begin{align}
+E_{6,\rm pair}&=-0.025260990473796-D_{\rm mixed},\\
+e_{6,\rm pair}^{\rm conn}&=0.097046248308400-D_{\rm mixed},\qquad D_{\rm mixed}\ge0.
+\end{align}
+The first is negative within this conditional construction. The connected coefficient has an undetermined sign.
+
+The spectral census identifies 828 mixed matrix-unit labels and 58 distinct gaps between $22/5$ and 14. It does not determine the transition amplitudes. With $z=P_{3,\rm mixed}V\psi_2$,
+\begin{equation}
+D_{\rm mixed}=\sum_{j=1}^{58}\frac{W_j}{\Delta_j},\quad
+W_j=\|P_{\Delta_j}z\|^2\ge0,
+\quad \frac{\|z\|^2}{14}\le D_{\rm mixed}\le\frac5{22}\|z\|^2.
+\end{equation}
+The connected coefficient is certainly positive if $\|z\|^2<0.427003492557$, and certainly negative if $\|z\|^2>1.358647476318$. The norm is still missing. Counting states, averaging inverse gaps, or fitting an older coefficient cannot supply it.
+
+A polynomial cross-check avoids diagonalization once $z$ is known. For $c=46/5$, $r=12/23$,
+\begin{equation}
+P_N(H)=\frac1c\sum_{n=0}^N(I-H/c)^n,
+\qquad |D-D_N|\le r^{N+1}D.
+\end{equation}
+For odd $N$, $D_N\le D\le D_N/(1-r^{N+1})$. The reproduced relative bounds are $2.2339230\times10^{-6}$ at degree 19 and $3.3388915\times10^{-9}$ at degree 29. This checks the resolvent, not the unknown coherent source.
+\src{mainTPV_spin10_2026-10-09_mixed_pair_archive_reconciliation.md}
+\src{mainTPV_spin10_mixed_sixth_spectral_checkpoint_20261009.md}
+
+\section{Exact entangled auxiliary model}
+For an external and an auxiliary pair in $16\otimes\overline{16}=1\oplus45\oplus210$, the combined total-singlet subspace is three-dimensional. With $D^a=Q_L^a-Q_R^a$, the conditional coupling $gD_{\rm ext}\cdot D_{\rm aux}$ has matrix
+\begin{equation}
+M=\begin{pmatrix}
+0&3\sqrt5/2&0\\
+3\sqrt5/2&0&\sqrt{42}\\
+0&\sqrt{42}&15/2
+\end{pmatrix},\quad
+H=J\diag(-45/8,-13/8,3/8)+gM.
+\end{equation}
+The source derives this using exact Casimir projectors and an independent four-spinor contraction. At $g/J=0.1$, the reproduced external probabilities are
+\begin{equation}
+(P_1,P_{45},P_{210})=(0.992835458782,\ 0.007099642503,\ 0.000064898715).
+\end{equation}
+The effective leading penalty is $\alpha=g^2/(8J)$, while
+\begin{equation}
+1-P_1=\frac{45}{64}(g/J)^2+O((g/J)^4)
+=\frac{45}{8}\frac\alpha J+\cdots.
+\end{equation}
+At finite coupling the external subsystem is not an exact singlet. The full system conserves the diagonal charge; that is not independent local Gauss invariance at each external site. In a many-cell system, local errors also require volume-uniform control.
+
+A scaling limit $J\to\infty$ with $\alpha$ fixed suppresses this isolated auxiliary leakage. It does not repair a separate intercell interaction that violates local constraints at finite $\alpha$. That failure is analyzed next.
+\src{mainTPV_spin10_exact_auxiliary_response_checkpoint_20261009.md}
+
+\chapter{Why algebra, curvature, and topology do not yet yield gauge emergence}
+\section{Local Gauss preservation is a dynamical condition}
+Take canonical ten-vectors $q_v,p_v$ and charges $G_v^{ij}=q_v^ip_v^j-q_v^jp_v^i$. These close as $\mathfrak{so}(10)$ at each site. For the simple interaction
+\begin{equation}
+H_{\rm int}=\frac\kappa2\sum_{\langle vw\rangle}\|q_v-q_w\|^2,
+\end{equation}
+one obtains
+\begin{equation}
+\{G_v^{ij},H\}=\kappa\sum_{w\sim v}(q_v^iq_w^j-q_v^jq_w^i).
+\end{equation}
+Thus charges initially zero need not remain zero. With $q_1=e_1$, $q_2=e_2$, $p_1=p_2=0$, and $\kappa=1.7$, the reproduced derivatives are $+1.7$ and $-1.7$. The global sum is conserved while local Gauss constraints fail.
+
+An on-site Casimir penalty commutes with the charge and does not cancel this bracket. The two-level Hamiltonian
+\begin{equation}
+H=\begin{pmatrix}0&t\\t&8\alpha\end{pmatrix}
+\end{equation}
+has charged ground-state probability
+\begin{equation}
+P_{\rm charged}=\frac12\left[1-\frac{8\alpha}{\sqrt{(8\alpha)^2+4t^2}}\right].
+\end{equation}
+At finite $t/\alpha$ it is nonzero. Gauge protection is an approximation requiring scale control; it is not automatically exact redundancy.
+
+Independent links transforming as $U_{vw}\mapsto O_vU_{vw}O_w^T$ repair invariance of $\|q_v-U_{vw}q_w\|^2$. But inserting those links assumes the structure whose emergence is at issue. Deriving their physical symplectic form, electric flux, and Gauss moment map is the missing task.
+
+\section{Nine-frame response and the quotient that removes its sign loop}
+For $m$ independent vectors in $\mathbb R^{10}$, the wedge response $C_m(\delta q)=\sum_a v_a\wedge\delta q_a$ has
+\begin{equation}
+\rank C_m=45-\frac{(10-m)(9-m)}2\quad(m\le9).
+\end{equation}
+The reproduced ranks for $m=1,\ldots,10$ are
+\begin{equation}
+9,17,24,30,35,39,42,44,45,45.
+\end{equation}
+Nine vectors first span all 45 response directions. The nine-frame manifold retracts to $\SO(10)$ and has a $\mathbb Z_2$ fundamental group, allowing a conditional sign-twisted quantization on its double cover.
+
+If those frame rotations are locally gauged, however, the quotient is represented by the positive Gram matrix $Q^TQ$:
+\begin{equation}
+F_{10,9}/\SO(10)\simeq\operatorname{Sym}_9^+.
+\end{equation}
+This space is convex and contractible. The naive frame sign loop disappears. This does not rule out topological geons, but it rules out using the unreduced frame loop as a physical FR sign without additional structure. Moreover, in a gauged sigma interpretation the same full-rank response can be a full-rank mass matrix, making gauge directions massive rather than creating massless gauge waves.
+\src{mainTPV_local_gauss_spinor_topology_checkpoint_20261009.md}
+
+\section{Pure frame transport and Berry curvature}
+Transport defined only as $U_{vw}=R_vR_w^{-1}$ telescopes around every plaquette. Its curvature is identically zero. A nontrivial Berry connection can evade that kinematic restriction: for an orthonormal rank-ten frame $V$ in $\mathbb R^{10+r}$,
+\begin{equation}
+A=V^T\dd V,\qquad F=\dd V^T(I-VV^T)\wedge\dd V.
+\end{equation}
+At a chosen point, normal derivatives $B_\mu\in\mathbb R^{r\times10}$ give
+\begin{equation}
+F_{\mu\nu}=B_\mu^TB_\nu-B_\nu^TB_\mu.
+\end{equation}
+A single skew curvature matrix has rank at most $2r$, requiring $r\ge5$ for generic rank ten. Simultaneously covering all six spacetime two-planes is harder: there are $6\times45=270$ curvature coefficients.
+
+There are $40r$ derivative parameters and a common $O(r)$ redundancy. For $r\le7$, the rank bound
+\begin{equation}
+\rank DF\le40r-r(r-1)/2
+\end{equation}
+is at most 259. At $r=8$, an explicit integer $270\times320$ Jacobian has rank 270 modulo 101. The certificate was rerun. Full modular row rank proves full rational and real row rank and hence local submersion at that point.
+
+This is a pointwise curvature-capacity theorem. It does not prove a global gauge field or dynamics. Around a constant plane parameterized by $S\in\mathbb R^{r\times10}$,
+\begin{equation}
+A_\mu=\tfrac12(S^T\partial_\mu S-\partial_\mu S^TS)+\cdots,
+\quad F_{\mu\nu}=\partial_\mu S^T\partial_\nu S-\partial_\nu S^T\partial_\mu S+\cdots.
+\end{equation}
+A projector sigma action gives scalar-like kinetic fluctuations; $F^2$ starts quartic. At $r=8$ the simple model has 80 scalar-type fluctuations, not 45 massless vectors with 90 transverse helicity states. A strong-coupling composite-vector mechanism would be an additional hypothesis, not a consequence of the rank certificate.
+\src{mainTPV_metric_and_Berry_curvature_checkpoint_20261009.md}
+
+\section{The actual emergence criterion}
+A successful construction needs one constrained physical TPV system producing all of the following: local first-class constraints; nontrivial physical transport; a positive transverse vector pole; nonlinear interactions compatible with the Ward identities; a spinorial lift where needed; and a controlled continuum limit. No retrieved record supplies this complete chain.
+
+The lattice continuum test must use dimensionless quantities such as $m_{0^{++}}/\sqrt\sigma$, not the dimensionful $m_{0^{++}}/\sigma$. Increasing a representation cutoff or calculating more strong-coupling coefficients is valuable but does not by itself establish a continuum trajectory, much less a spacetime origin for the gauge sector.
+
+\chapter{Metric-affine geometry and causal nonlocal response}
+\section{A candidate geometric action}
+The independent connection proposal treats both $g$ and $\mathcal A$ as spacetime variables. It considers an Einstein--Palatini term, metric form factors, a Weyl-cubic invariant, and homothetic curvature
+\begin{equation}
+Q_{\mu\nu}=\mathcal R^\lambda{}_{\lambda\mu\nu}(\mathcal A).
+\end{equation}
+A representative form factor is $\gamma_\ell(z)=[e^{-\ell^2z}-1]/z$. In the metric quadratic sector its Euclidean multiplier is $e^{\ell^2k_E^2}$, so the propagator is exponentially damped and has no extra finite complex zeros from that multiplier. This is a flat-space pole statement, consistent with established nonlocal-gravity constructions \cite{Biswas}. It does not establish interacting unitarity or a causal Lorentzian prescription.
+
+The linear static potential is
+\begin{equation}
+\Phi(r)=-\frac{GM}{r}\operatorname{erf}\left(\frac r{2\ell}\right),\qquad
+\Phi(0)=-\frac{GM}{\sqrt\pi\ell}.
+\end{equation}
+A finite linearized potential is not a proof of a nonsingular nonlinear spacetime.
+
+\section{The full connection audit and its Abelian restriction}
+Write $\mathcal A^\lambda{}_{\rho\mu}=\{^\lambda{}_{\rho\mu}\}+C^\lambda{}_{\rho\mu}$. Up to a divergence the connection distortion appears algebraically in Einstein--Palatini:
+\begin{equation}
+\mathcal R=R+g^{\rho\nu}\left(C^\lambda{}_{\sigma\lambda}C^\sigma{}_{\rho\nu}
+-C^\lambda{}_{\sigma\nu}C^\sigma{}_{\rho\lambda}\right)+\text{divergence}.
+\end{equation}
+The reproduced 64-component Euclidean Hessian has rank 60, with exactly four projective null directions
+\begin{equation}
+C^\lambda{}_{\rho\mu}=\delta^\lambda{}_{\rho}A_\mu.
+\end{equation}
+Its Euclidean algebraic signature is 36 positive, 24 negative, and four zero. Negative auxiliary algebraic directions are not automatically propagating ghosts.
+
+The trace of a matrix commutator vanishes, so homothetic curvature differentiates only the connection trace. On the projective solution,
+\begin{equation}
+Q=4\dd A,\qquad g^{\mu\nu}\mathcal R_{\mu\nu}=R(g).
+\end{equation}
+With no other connection dependence or matter hypermomentum, the nonprojective connection is eliminated algebraically. The resulting dynamical trace is one Abelian connection. Altering its scalar form factor cannot produce 45 non-Abelian connections.
+\src{mainTPV_full_affine_and_causal_memory_checkpoint_20261009.md}
+
+\section{Why the naive non-Abelian affine extension fails}
+An ordinary four-dimensional tangent connection is $\mathfrak{gl}(4,\mathbb R)$-valued, with 16 generators. It cannot faithfully contain a 45-dimensional $\mathfrak{so}(10)$ algebra. An emergent collective bundle is not ruled out by this dimension count, but it is a different construction that must be derived.
+
+For the specific trace-free Yang--Mills-like bilinear $-\Tr(XY)$ on $\mathfrak{sl}(4,\mathbb R)$, the six antisymmetric directions and nine symmetric trace-free directions have opposite signs. A positive scalar form factor cannot change that inertia. If all those directions propagate with this kinetic form, wrong-sign sectors remain. Tuned and constrained metric-affine models can have different spectra, so this is not a universal metric-affine no-go. The relevant literature itself includes an erratum that must accompany the original analysis \cite{Percacci, PercacciErratum}.
+\src{mainTPV_nonabelian_affine_collective_checkpoint_20261009.md}
+
+\section{Retarded kernels cannot simply be inserted into a single-field action}
+For a bilinear single-field action $S=\tfrac12\int A(x)K(x,y)A(y)$,
+\begin{equation}
+\frac{\delta S}{\delta A}=\frac12(K+K^T)A.
+\end{equation}
+A strictly retarded kernel is therefore symmetrized by variation, introducing advanced support. A causal reduced equation requires an initial-value prescription or an in-in influence functional with doubled variables. Nonlocality alone does not specify causality.
+
+\section{A positive local parent with memory}
+A simple transverse Euclidean two-vector model is
+\begin{equation}
+S_E=\int\left[\tfrac14F_A^2+\tfrac\chi4F_B^2+\tfrac{\chi m^2}{2}(A-B)^2\right],\quad\chi,m^2>0.
+\end{equation}
+Its quadratic matrix and Schur complement are
+\begin{align}
+K&=\begin{pmatrix}k^2+\chi m^2&-\chi m^2\\-\chi m^2&\chi(k^2+m^2)\end{pmatrix},\\
+K_{\rm eff}&=k^2\left[1+\frac{\chi m^2}{k^2+m^2}\right],\\
+D_A&=\frac1{1+\chi}\frac1{k^2}
++\frac\chi{1+\chi}\frac1{k^2+(1+\chi)m^2}.
+\end{align}
+The residues are positive. At $\chi=0.75$, $m^2=2$, they are $4/7$ and $3/7$, and the massive pole has mass squared 3.5. Eliminating $B$ with specified vanishing independent initial data gives a retarded convolution,
+\begin{equation}
+B_k(t)=m^2\int_{-\infty}^t\dd s\,
+\frac{\sin[\omega_m(t-s)]}{\omega_m}A_k(s),\quad\omega_m^2=k^2+m^2.
+\end{equation}
+This example demonstrates causal memory generated by additional healthy local dynamics. It has a massive vector in addition to the massless one, and is not the same theory as an entire exponential form factor. Its complete embedding in a physical geometric TPV action remains open.
+
+More generally, if a local parent's zero-momentum block matrix is strictly positive definite, its Schur complement is strictly positive definite. Integrating out gapped modes cannot create an exact zero eigenvalue in that setting. A massless gauge pole requires a protected zero mode, a constraint, a critical limit, or another mechanism. Memory does not bypass this requirement.
+
+\section{The common kernel in a physical-polarization propagator}
+\label{sec:spectral-parent}
+The common kernel's positive static response must be distinguished from positivity of a propagator obtained by inserting it into a kinetic operator. Define
+\begin{equation}
+t=\frac{\ell_*^2k_E^2}{\beta},\qquad
+\widehat K(t)=K_\beta(\beta t)
+=\int_1^2\dd s\,w(s)\frac{t}{t+s},\qquad w(s)=6(s-1)(2-s).
+\end{equation}
+The new checkpoint compares two distinct dimensionless two-point functions for one normalized physical polarization:
+\begin{equation}
+D_+(t)=\frac{1}{t[1+g\widehat K(t)]},\qquad
+D_-(t)=\frac{1}{t[1+g(1-\widehat K(t))]},\qquad g>0.
+\end{equation}
+Neither placement was specified as the actual constrained TPV tensor Hessian. A conclusion about these functions must not silently become a conclusion about every use of $K_\beta$.
+
+\subsection{An exact positive-spectral-weight obstruction}
+For a standard nonnegative K\"all\'en--Lehmann measure with finite total weight,
+\begin{equation}
+D(t)=\frac{Z_0}{t}+\int_{0^+}^{\infty}
+\frac{\dd\mu(m^2)}{t+m^2},\qquad \dd\mu\ge0,
+\end{equation}
+the ultraviolet coefficient obeys $\lim_{t\to\infty}tD(t)=Z_0+\int\dd\mu\ge Z_0$. For $D_+$, the massless residue is $Z_0=1$ while the ultraviolet coefficient is $1/(1+g)<1$. Thus this placement cannot have such a positive spectral measure for any $g>0$. This argument concerns a physical-polarization channel with the stated spectral interpretation, not a gauge-dependent metric component or an arbitrary Euclidean static energy.
+
+For $D_-$, the massless residue is $1/(1+g)$ and the ultraviolet coefficient is one. The remaining positive weight $g/(1+g)$ can be supplied by additional modes. The following construction realizes this at the quadratic level.
+
+\subsection{A continuum positive quadratic parent}
+For one polarization $a$ and auxiliary modes $b_s$, take
+\begin{equation}
+S_E^{(2)}=\frac12ta^2+
+\frac g2\int_1^2\dd s\,w(s)\left[tb_s^2+s(a-b_s)^2\right].
+\end{equation}
+For $t\ge0$ its terms are nonnegative. Eliminating $b_s=s a/(t+s)$ gives
+\begin{equation}
+\mathcal K_{\rm eff}(t)=t\left[1+g\int_1^2\dd s\,w(s)\frac{s}{t+s}\right]
+=t[1+g(1-\widehat K(t))].
+\end{equation}
+This generalizes the earlier two-vector quadratic example to the supplied spectral distribution. Lorentzian auxiliary wave equations with consistently specified initial data permit retarded elimination and causal memory. An effective quantum treatment additionally needs the appropriate in-in prescription, state, and noise correlations. Positive Gaussian mode dynamics does not furnish the missing covariant rank-two geometric parent, gravitational constraints, or non-Abelian gauge sector.
+
+\subsection{Reproduced poles and continuum weights}
+On the cut $t=-u+i0$, $1<u<2$,
+\begin{equation}
+\operatorname{Im}\widehat K(-u+i0)=\pi u w(u),\qquad
+\rho(u)=-\frac1\pi\operatorname{Im}D(-u+i0).
+\end{equation}
+The continuum density is negative for $D_+$ and positive for $D_-$. Independent real-axis pole finding and continuum integration in the supplied audit, rerun here, give at $g=1$:
+\begin{center}\begin{tabular}{lrr}\toprule
+Quantity & $D_+$ & $D_-$\\\midrule
+Massless residue & $1$ & $0.5$\\
+Isolated pole $t$ & $-0.714484591$ & $-3.065444639$\\
+Pole residue & $-0.472969239$ & $+0.478969416$\\
+Integrated continuum weight & $-0.027030761$ & $+0.021030584$\\
+Total spectral weight & $0.5$ & $1$\\
+Pole mass squared $(\lp^{-2})$ & $0.00215904647$ & $0.00926323325$\\\bottomrule
+\end{tabular}\end{center}
+With the conditional momentum identification, the continuum mass-squared band is $[0.003021823696,0.006043647392]\lp^{-2}$. Both spectral sums agree with the respective ultraviolet coefficients to better than $10^{-12}$. The reported pole masses belong to this test model, not to measured or derived TPV particles.
+
+This excludes the increasing multiplier $1+g\widehat K$ under the stated positive-spectral assumptions, while the complementary placement has an explicit positive quadratic realization. It does not invalidate the common kernel as a static curvature susceptibility, nor does it certify the nonlinear throat control of Chapter 8. A common parent action must determine the operator placement and source rather than selecting them independently for each desired property.
+\src{mainTPV_D5_tensor_spectral_parent_checkpoint_20261009(1).md}
+\src{mainTPV_tensor_spectral_parent_audit_20261009(1).py}
+
+
+\chapter{Laboratory anomalies, energy, and momentum}
+\section{Scope of the anomaly branch}
+The research questions include the propulsion claims associated with Buhler, electrogravity and metric-engineering proposals, conditioned magnets associated with Manelas and Sweet, the claims associated with Gray, Shoulders, and Bedini, and cold-fusion or excess-heat claims. Complete underlying records and experimental data for every case were not recovered in this edition. Accordingly this chapter supplies the theoretical disposition and the missing-evidence requirements; it is not an experimental review or a blanket verdict on every apparatus.
+
+The active neutron-star gate cannot be transferred to a laboratory magnet merely because both systems involve electromagnetic fields. Its density and curvature scales, its matter-frame definition, and its action determine the coupling. Changing the gate to obtain a desired laboratory force constitutes a new model requiring independent tests.
+
+\section{Static activation and conservation}
+The $B_{\mu\nu}$ in the active interaction is magnetic \emph{Weyl curvature}, not the laboratory magnetic induction vector. A magnet's ordinary $\bm B$ does not directly imply a large $B_{\mu\nu}B^{\mu\nu}$. In a static purely electric spacetime relative to the aligned frame, the magnetic Weyl invariant vanishes.
+
+For a closed system, internal forces do not produce steady acceleration of its total center of momentum. A finite-volume balance includes material, electromagnetic, and geometric contributions and boundary momentum flux. Schematically,
+\begin{equation}
+\frac{\dd P_i^{\rm inside}}{\dd t}=-\int_{\partial V}T_{ij}^{\rm total}\,\dd S_j
++\text{external forces},
+\end{equation}
+with gravitational charges treated appropriately in a full spacetime description. A proposed ambient TPV reservoir must specify its flux, coupling, stress, and response. It cannot serve as an unspecified exemption from conservation.
+
+For momentum carried solely by outgoing massless radiation, $F\le P/c$. At an illustrative force of $237\,\mu\mathrm N$, the required radiated power is at least $71.05\,\mathrm{kW}$. This arithmetic is reproduced; the force value is used as a historical example, not certified experimental data. Massive reaction products or external media obey different energy-per-momentum relations and must be accounted for explicitly.
+
+\section{Maxwell stress and ideal Casimir scales}
+A dimensional control for high-voltage force measurements is the ordinary electrostatic pressure $p_E=\epsilon_0E^2/2$. For $25\,\mathrm{kV}$ across $6.35\,\mathrm{mm}$,
+\begin{equation}
+E=3.9370\times10^6\,\mathrm{V\,m^{-1}},\qquad p_E=68.6201\,\mathrm{Pa}.
+\end{equation}
+An uncompensated area of $3.4538\,\mathrm{mm}^2$ at that pressure corresponds to $237\,\mu\mathrm N$. This calculation does not explain any particular apparatus; it establishes the scale at which supports, leads, fringing fields, and external electrostatic coupling must be measured.
+
+For ideal parallel conducting plates separated by $d$, define $C_d=\pi^2\hbar c/(720d^4)$. In an orthonormal frame with the last axis normal to the plates,
+\begin{equation}
+u=-C_d,\qquad T^{\hat\mu\hat\nu}=C_d\diag(-1,1,1,-3).
+\end{equation}
+The idealized tensor is traceless and carries no energy flux. Its negative energy density alone does not supply an arbitrary target geometry. A dimensional metric-response estimate on the separation scale is $h_{\rm scale}=8\pi G|u|d^2/c^4$:
+\begin{center}\begin{tabular}{rrr}\toprule
+$d\ (\mu\mathrm m)$ & $|u|\ (\mathrm{J\,m^{-3}})$ & $h_{\rm scale}$\\\midrule
+4.0 & $1.693\times10^{-6}$ & $5.625\times10^{-60}$\\
+1.5 & $8.560\times10^{-5}$ & $4.000\times10^{-59}$\\
+1.0 & $4.334\times10^{-4}$ & $9.000\times10^{-59}$\\
+0.1 & $4.334$ & $9.000\times10^{-57}$\\\bottomrule
+\end{tabular}\end{center}
+These values are independently recomputed in this revision. The last column is a scale estimate, not a solved finite-cavity metric. Real plates, supports, finite conductivity, temperature, and apparatus stress must be included in a complete source model. A dynamical Casimir process must also account for its driving energy and emitted momentum; invoking vacuum fluctuations does not close the device's energy balance.
+\monosrc{Chapter 5}
+
+\section{Inverse metric sourcing and a Gaussian-shift obstruction}
+Consider the ADM metric
+\begin{equation}
+\dd s^2=-N^2c^2\dd t^2+
+\gamma_{ij}(\dd x^i+\beta^ic\dd t)(\dd x^j+\beta^jc\dd t).
+\end{equation}
+The Hamiltonian and momentum constraints in geometrized units are
+\begin{equation}
+{}^{(3)}R+K^2-K_{ij}K^{ij}=16\pi\rho,\qquad
+D_j(K^{ij}-\gamma^{ij}K)=8\pi j^i.
+\end{equation}
+They must be satisfied by the same material or quantum source as the remaining Einstein equations. Prescribing a desirable metric and matching only its energy-density profile is insufficient.
+
+For $N=1$, $\gamma_{ij}=\delta_{ij}$, and an $x$-independent transverse Gaussian shift,
+\begin{equation}
+\beta^x=b\exp[-(y^2+z^2)/(2L^2)],\qquad\beta^y=\beta^z=0,
+\end{equation}
+one ADM convention gives the required energy density and flux in energy-density units as
+\begin{align}
+\rho_{\rm req}&=-\frac{c^4}{32\pi G}
+\left[(\partial_y\beta^x)^2+(\partial_z\beta^x)^2\right],\\
+\mathcal J_{x,\rm req}&=\frac{c^4}{16\pi G}
+(\partial_y^2+\partial_z^2)\beta^x.
+\end{align}
+Here $\mathcal J_x$ denotes the normal-frame stress-energy flux component, with units $\mathrm{J\,m^{-3}}$; the associated physical momentum density has magnitude $|\mathcal J_x|/c$. Reversing the extrinsic-curvature sign convention reverses its sign but not the mismatch. At the center,
+\begin{equation}
+\rho_{\rm req}(0)=0,\qquad K_{ij}(0)=0,\qquad
+\mathcal J_{x,\rm req}(0)=-\frac{c^4b}{8\pi GL^2}.
+\end{equation}
+For this stationary metric the monograph's full source calculation also gives vanishing spatial stress at the center. Nonzero time--space stress with vanishing diagonal entries violates the null energy condition in one of the two $x$-directed null directions. Ordinary classical electromagnetic stress cannot supply that source. The nontrivial mixed time--space block has imaginary eigenvalues, giving a type-IV stress classification at that point; this is a conditional characterization of this ansatz, not a no-go theorem for all metrics or all quantum states.
+
+The mismatch can be quantified without a large shift amplitude. At transverse radius $L$, matching $|\rho_{\rm req}|$ to ideal Casimir density with plate separation $d=L$ requires
+\begin{equation}
+|b|=\left(\frac{32\pi G L^2\mathrm e\,C_L}{c^4}\right)^{1/2}.
+\end{equation}
+At $L=1.5\,\mu\mathrm m$, the revision reproduces
+\begin{align}
+|b|&=2.08545\times10^{-29},\\
+|\mathcal J_{x,\rm req}(0)|&=4.46328\times10^{25}\,\mathrm{J\,m^{-3}},\\
+|\mathcal J_{x,\rm req}(0)|/C_L&=5.21381\times10^{29}.
+\end{align}
+The ideal static Casimir source has zero flux. Matching a negative density of order $b^2$ misses the momentum constraint at order $b$. Matching density at one point and comparing the flux requirement at another is a diagnostic scale comparison, not an assertion of a pointwise material fit.
+
+Allowing curved spatial slices changes the problem. For $\gamma_{ij}=\psi^4\delta_{ij}$ with $\psi=1+a/\sqrt{1+r^2/L^2}$,
+\begin{equation}
+{}^{(3)}R=\frac{24a}{L^2\psi^5}(1+r^2/L^2)^{-5/2}.
+\end{equation}
+Positive $a$ can contribute positive Hamiltonian-constraint curvature. The monograph reports a necessary radial null-energy screen near $a\gtrsim2.28|b|$ for one extended Gaussian family. This is not a sufficient all-direction energy-condition test or a construction of its material equation of state. Changing the geometry requires solving the complete source problem again.
+\monosrc{Chapter 6}
+
+\section{A proposed electromagnetic extension and discriminating tests}
+The neutron-star gate is defined through relativistic fluid variables and vanishes in vacuum. Capacitors, superconducting circuits, and Casimir cavities are not automatically governed by that particular gate. One possible additional EFT operator is
+\begin{equation}
+\Delta S_{\rm EM}=\frac{\eta\ell^2}{4\mu_0}
+\int\dd^4x\sqrt{-g}\,C_{\mu\nu\rho\sigma}F^{\mu\nu}F^{\rho\sigma}.
+\end{equation}
+Here $\eta$ is dimensionless and $\ell$ sets the interaction length; the normalization uses the same spacetime-coordinate convention as the Maxwell action. This is a candidate extension, not a coupling derived from the existing stellar or geon branch. Its Maxwell equation, metric stress, derivative terms, and any additional degrees of freedom must be varied and checked together. A constitutive response inserted independently of its stress tensor does not provide a complete theory.
+
+A useful laboratory program would fix the action and couplings before fitting unexplained residuals. It would compare tensor-anisotropic and symmetric geometries with matched electromagnetic energy, record external force and momentum flux, reverse polarity and orientation, and measure thermal, wiring, and support effects. The theory should supply a quantitative angular dependence or other discriminating signal. A null result then bounds a specified coupling; a positive residual still requires independent experimental validation and comparison with ordinary sources.
+\monosrc{Chapter 12}
+
+\section{A local polarizability is not a propulsion explanation}
+A candidate geon response of the form
+\begin{equation}
+\Delta H=-\tfrac12\alpha_0 E^2-\tfrac12\alpha_2Q^{ij}E_iE_j
+\end{equation}
+can produce local gradient forces. Those forces must be summed with the field source, supports, and environment. Reproducing a voltage-squared scaling is not enough to explain steady closed-system thrust.
+
+For an isolated irreducible physical $j=1/2$ multiplet, a rank-two tensor has no diagonal matrix element by angular-momentum selection. A first-order permanent quadrupole term cannot simply be assigned to it. Higher-order induced response or couplings to excited states require an explicit spectrum and matrix elements. This is one reason a classical field-shape analogy cannot be directly promoted to a quantum-particle force law.
+
+\section{Conditioned magnets and excess-energy claims}
+Layered or multipolar magnetization changes conventional domains, field gradients, and hysteresis; it can also change a specified new coupling's form factor. It does not establish a new energy source. Tests must account for preparation and stored energy, dissipation, measurement bandwidth, environmental exchange, and full-cycle balance.
+
+The same distinction applies to high-voltage transients, pulsed devices, and claimed excess heat. A waveform or geometry-dependent response can be real while its proposed energy interpretation is wrong. Conversely, a null result for the present $\Gamma B^2$ operator does not exclude every imaginable future TPV interaction. It excludes an explanation by that operator under its stated assumptions.
+
+The present models supply \emph{no established TPV explanation} for these propulsion or energy claims. A testable proposal requires an action, independently constrained parameters, and a quantitative discriminating signal.
+
+\chapter{Unified assessment and the shortest route to stronger conclusions}
+\section{The architecture that survives}
+The interpretive branch is mathematically coherent on its metric-induced constitutive subspace. The active magnetic-Weyl branch defines a conditional EFT with an exact inactive static sector, a corrected restricted rotational calculation, and a positive frozen-fluid TT screen. The microscopic common-kernel branch has bounded-response and monotonicity properties, restricted locking tests, and an explicit conditional throat-source target. Its curvature-invariant completion can introduce negative static directions; the tested nonlinear scalar--Gauss--Bonnet continuation grid yields no completed global exterior. The representation-theoretic branch has exact conditional algebra and several explicit obstructions. The metric-affine branch supplies a geometric Abelian control. Two quadratic memory constructions illustrate positive auxiliary-mode response; the common-kernel calculation also excludes one particular kinetic placement under standard positive-spectral assumptions.
+
+These are pieces of an architecture, not a completed unified action. The relation between the Planck-scale kernel and the neutron-star gate is a matching hypothesis. A low-momentum derivative expansion may motivate effective operators, but it does not fix their numerical coefficients, tensor projectors, matter dependence, or causal prescription without calculation.
+
+\section{A compact result ledger}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}}
+\toprule Claim & Current status & Limitation\\\midrule\endhead
+Metric-induced TPV equals GR & Exact conditional reparametrization & No new prediction or microscopic derivation\\
+Static $B=0$ sector & Exact for smooth specified action & Does not fix dynamical perturbations\\
+Positive rotational shift & Later restricted calculation and reproduced arithmetic & Full charge and second-order coupled audit open\\
+Interior/exterior rotation & Smooth-boundary projection identity & Restricted first-order axial sector only\\
+Local TT stability & Reproduced spectrum; corrected discrete baseline & Frozen fluid and flat local/1D surrogate only\\
+Historical stellar tides/quadrupole & Reported conditional results & Need reconciliation with later source audits\\
+Active merger & Formulation and reduced estimates & No full converged active 3D evolution\\
+Common spectral response & Positive static kernel; no-fold law & Does not fix a kinetic operator or source\\
+Geometric locking & Positive restricted radial model; completion hazards & Covariant physical Hessian not established\\
+Throat source & Conditional null-curvature target computed & No microscopic source derived\\
+Nonlinear EsGB control & 30 outward runs reproduced; all stop at cutoffs & Fixed-reference auxiliary starts; no global solution\\
+D5 geon & Reduced geometric screens & Full solution, all-surface search, stability missing\\
+Fermions from topology & Conditional quantization mechanisms & Physical reduced geon space and poles missing\\
+Flavor masses and mixing & Overlap models and fits & No derived parameter-free spectrum\\
+Spin(10) lattice coefficient & Corrected exact $c_2$ & Gauge links assumed; continuum unproved\\
+Full mixed sixth order & Positive spectral expression and bounds & Transition weights not computed\\
+Berry curvature capacity & Exact rank certificate reproduced & No independent vector kinetic pole\\
+Local Gauss from site charges & Simple candidate fails & Links or physical transport must emerge\\
+Affine trace model & One Abelian connection & Does not produce Spin(10)\\
+Causal memory & Positive two-vector and continuum-mode controls & Covariant geometric parent absent\\
+Kernel in propagator & Increasing placement fails positive spectral test; complement has quadratic parent & One physical-polarization diagnostic only\\
+Gaussian-shift sourcing & Required density and flux do not match ideal Casimir stress & Specified ansatz; no universal warp no-go\\
+Electromagnetic extension & Proposed curvature--field operator & Couplings and complete equations not derived\\
+Laboratory anomalies & No established explanation & Incomplete source/data coverage and no matched model\\\bottomrule
+\end{longtable}
+
+\section{What would count as completion}
+For the active gravitational branch, the near-term goal is a fully specified covariant source and fluid system, consistent boundary charges, a well-controlled perturbative evolution, and a concrete observable surviving numerical and EFT error estimates. The latest retrieved checkpoint explicitly does not claim that the final publishable-prediction threshold has been reached. This manuscript does not change that scientific status merely by consolidating the work.
+
+For the matter branch, completion requires a stable localized physical spacetime state, quantization on its reduced configuration space, the correct physical spin and exchange statistics, chiral representations and anomaly consistency, gauge dynamics, and a controlled connection to observed masses and interactions. A mathematical $16$ is one part of that list.
+
+For a strong-field merger result, final success means a controlled active matter-merger evolution with stable numerics and a converged non-GR observable. Definitive failure would require an unavoidable inconsistency or inability to maintain control in the target regime. Neither verdict is established by the retrieved reduced-data studies.
+
+\section{Priority calculations}
+\begin{enumerate}
+\item Complete the unrestricted metric--fluid variation of the active action and test a nontrivial radial/polar or nonstationary Noether identity, including boundary charges.
+\item Use the corrected off-shell source for stellar interiors; verify the smooth-boundary projection conditions before carrying over an exterior inertia coefficient. Recompute second-order observables and independently audit the coupled principal system inside the EFT domain.
+\item Evaluate the covariant source on a complete three-dimensional GR merger background before claiming an active waveform prediction.
+\item Specify the microscopic TPV parent state space and action before adding further internal algebra. Derive its physical Hessian and constraints.
+\item Derive one geometric parent consistent with the throat source and spectral tests. Solve its global boundary-value problem with auxiliary amplitudes and far-field decay on the same geometry; then test the gauge-reduced physical Hessian, Lorentzian principal symbol, and topology. Local calibration and static radial singular values are not substitutes.
+\item Compute the missing coherent mixed-shell transition only within its declared conditional lattice model; separately establish link, volume, and continuum convergence.
+\item Derive the infrared coefficients from the microscopic response or treat them explicitly as phenomenological parameters constrained by data.
+\end{enumerate}
+A negative result at any one of these steps can rule out a particular candidate while leaving the ontology open. A positive result should be promoted only to the scope actually tested.
+
+\appendix
+\chapter{Independent compact audit supplied with this edition}
+The following program was executed for this edition. It reproduces arithmetic and reduced-model statements explicitly named in the chapters. It does not construct a geon, prove the parent theory, or perform a merger. The same code is provided as \path{TPV_thesis_audit.py}; its captured output is \path{TPV_thesis_audit_results.json}. Python 3, NumPy, and SciPy are sufficient.
+
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+"""Self-contained arithmetic and reduced-model checks for TPV thesis draft.
+Requires Python 3, NumPy and SciPy. No claim of full TPV validation.
+"""
+from fractions import Fraction as F
+import json, math
+import numpy as np
+from scipy.integrate import quad
+
+out={}
+# Exact Haar-normalized strong-coupling coefficient.
+C16=F(45,8)
+blocks=[[(10,F(9,2)),(120,F(21,2)),(126,F(25,2))],
+        [(1,F(0)),(45,F(8)),(210,F(12))]]
+for block in blocks: assert sum(F(d,256) for d,c in block)==1
+A=sum((F(d,256)/(2+c/C16) for block in blocks for d,c in block),F(0))
+c2=4*(F(1,2)-A)
+assert A==F(662262,1315237)
+assert c2==F(-18574,1315237)
+out['strong_coupling']={'A':str(A),'c2':str(c2),'decimal':float(c2)}
+# Positive common kernel and the quartic no-fold polynomial.
+beta=.05330497; z=.613; ell=4.2; C=1.45735
+kernel=quad(lambda s:6*(s-1)*(2-s)*z/(z+beta*s),1,2,epsabs=1e-13)[0]
+coef=[1,2-3*C,1+C]
+disc=coef[1]**2-4*coef[0]*coef[2]
+assert disc<0 and coef[2]>0
+out['kernel']={'K':kernel,'correlation_lengths':[ell/math.sqrt(2*beta),ell/math.sqrt(beta)],'no_fold_polynomial':coef,'discriminant':disc}
+# Exact reduced auxiliary Hamiltonian.
+g=.1; J=1.
+M=np.array([[0,3*np.sqrt(5)/2,0],[3*np.sqrt(5)/2,0,np.sqrt(42)],[0,np.sqrt(42),7.5]])
+H=J*np.diag([-45/8,-13/8,3/8])+g*M
+E,V=np.linalg.eigh(H)
+prob=V[:,0]**2
+assert abs(prob.sum()-1)<1e-13
+out['auxiliary']={'energy':float(E[0]),'probabilities':prob.tolist()}
+# Mixed sixth-order bounds: do not invent unknown source weights.
+threshold=.097046248308400
+out['mixed_shell']={'positive_if_norm2_below':(22/5)*threshold,'negative_if_norm2_above':14*threshold,'degree19_bound':(12/23)**20,'degree29_bound':(12/23)**30}
+# Radial rotational benchmark from retrieved Q and I.
+alpha=.005; LQ2=.059333; Q=.534166573628; I=94.01076
+out['rotation']={'lambda_km2':alpha/LQ2,'delta_I_km3':alpha/LQ2*Q/4,'fraction':alpha/LQ2*Q/(4*I)}
+# Causal two-vector Schur complement and spectral decomposition.
+chi=.75;m2=2.
+for k2 in [.1,1.,3.]:
+ K=np.array([[k2+chi*m2,-chi*m2],[-chi*m2,chi*(k2+m2)]])
+ eff=K[0,0]-K[0,1]**2/K[1,1]
+ spectral=1/(1+chi)/k2+chi/(1+chi)/(k2+(1+chi)*m2)
+ assert np.linalg.eigvalsh(K).min()>0
+ assert abs(1/eff-spectral)<1e-12
+out['memory']={'residues':[1/(1+chi),chi/(1+chi)],'mass2':(1+chi)*m2}
+# Illustrative momentum/energy accounting, not an experimental input audit.
+out['illustrative_radiation']={'force_N':237e-6,'minimum_massless_radiation_power_W':237e-6*299792458}
+print(json.dumps(out,indent=2))
+\end{Verbatim}
+\section{Captured compact-audit output}
+\begin{Verbatim}[breaklines=true,fontsize=\small]
+{
+  "strong_coupling": {
+    "A": "662262/1315237",
+    "c2": "-18574/1315237",
+    "decimal": -0.01412216961657861
+  },
+  "kernel": {
+    "K": 0.8848760848828522,
+    "correlation_lengths": [
+      12.863242020936333,
+      18.191371322095662
+    ],
+    "no_fold_polynomial": [
+      1,
+      -2.3720499999999998,
+      2.45735
+    ],
+    "discriminant": -4.202778797500001
+  },
+  "auxiliary": {
+    "energy": -5.653363241438638,
+    "probabilities": [
+      0.9928354587822938,
+      0.007099642503187326,
+      6.489871451904455e-05
+    ]
+  },
+  "mixed_shell": {
+    "positive_if_norm2_below": 0.42700349255696,
+    "negative_if_norm2_above": 1.3586474763176,
+    "degree19_bound": 2.2339230053870515e-06,
+    "degree29_bound": 3.3388914567189092e-09
+  },
+  "rotation": {
+    "lambda_km2": 0.08427013634908062,
+    "delta_I_km3": 0.011253572498188194,
+    "fraction": 0.00011970515394395485
+  },
+  "memory": {
+    "residues": [
+      0.5714285714285714,
+      0.42857142857142855
+    ],
+    "mass2": 3.5
+  },
+  "illustrative_radiation": {
+    "force_N": 0.000237,
+    "minimum_massless_radiation_power_W": 71050.812546
+  }
+}
+
+\end{Verbatim}
+\section{Revision audit and its validation boundaries}
+The companion \path{TPV_revision_audit.py} reruns the archived TT module and supplies independent laboratory arithmetic, fixed-current variations, and a synthetic boundary-cancellation test. At 800 interior points the zero-coupling frequencies agree with the analytic discrete Dirichlet eigenvalues. The maximum absolute velocity-variation discrepancy in the selected finite-difference test is below $3\times10^{-12}$, and the density-variation discrepancy below $10^{-12}$. These selected tests do not replace an arbitrary-background field-equation audit.
+
+For the synthetic radial example $j=w_0=1$, $\phi=r^2(1-r)^4$ on $[0,1]$, the local source $\mathcal H[\phi](1/2)=-0.0390625$ is nonzero while $\int_0^1\mathcal H[\phi]\dd r$ vanishes to numerical precision. This illustrates how a changed interior source can have zero exterior projection. It is deliberately identified as a mathematical test of the boundary identity, not a new physical star.
+
+The following listing records the exact revision program. It requires the archived TT source supplied in the package; both the original and revised normalizations are retained in its JSON output.
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+"""TPV v0.2: source-comparison arithmetic and discrete spectrum normalization.
+Run from the extracted research package; requires NumPy and SciPy.
+These are restricted checks, not a full covariant-field-equation audit.
+"""
+import importlib.util
+import json
+from pathlib import Path
+import numpy as np
+from scipy.integrate import quad
+
+root = Path(__file__).resolve().parent
+source = root / 'sources' / 'tpv_tensor_stability_audit.py'
+if not source.exists():
+    candidates = sorted((root / 'sources').glob('tpv_tensor_stability_audit*.py'))
+    if not candidates:
+        candidates = sorted((root.parent / 'sources').glob('tpv_tensor_stability_audit*.py'))
+    source = candidates[0]
+spec = importlib.util.spec_from_file_location('tt_archive', source)
+tt = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(tt)
+out = {}
+
+# Use the same finite-difference GR operator, not continuum n*pi/R.
+n = 800
+base = tt.modes(n, 0)
+k = np.arange(1, 6)
+exact_discrete = 2 / base['dx'] * np.sin(k*np.pi/(2*(n+1)))
+assert np.allclose(base['wave_numbers'], exact_discrete, rtol=1e-9)
+out['tt'] = {'n_interior': n, 'GR_discrete_over_continuum': base['ratios'].tolist()}
+for alpha in [.005, .05]:
+    m = tt.modes(n, alpha)
+    out['tt'][str(alpha)] = {
+        'over_continuum': m['ratios'].tolist(),
+        'over_discrete_GR': (m['wave_numbers']/base['wave_numbers']).tolist()}
+
+c = 299792458.
+G = 6.67430e-11
+hbar = 1.054571817e-34
+eps0 = 8.8541878128e-12
+E = 25000/.00635
+pressure = eps0*E**2/2
+out['maxwell'] = {'E_V_per_m': E, 'pressure_Pa': pressure,
+                  'area_for_237_microN_mm2': 237e-6/pressure*1e6}
+out['casimir'] = []
+for d in [4e-6, 1.5e-6, 1e-6, 1e-7]:
+    u = np.pi**2*hbar*c/(720*d**4)
+    out['casimir'].append({'d_m': d, 'abs_u_J_m3': u,
+                          'h_scale': 8*np.pi*G*u*d*d/c**4})
+L = 1.5e-6
+u = np.pi**2*hbar*c/(720*L**4)
+b = np.sqrt(u*32*np.pi*G*L**2*np.e/c**4)
+j = c**4*b/(8*np.pi*G*L**2)
+out['gaussian_shift'] = {'b_density_match': b, 'center_flux_energy_units_J_m3': j,
+                         'flux_over_Casimir_density': j/u}
+beta = .05330497
+low_z = quad(lambda s: 6*(s-1)*(2-s)/(beta*s),1,2)[0]
+out['kernel'] = {'linear_coefficient': low_z,
+                 'at_1_micron_linear_approx': low_z*(4.2*1.616255e-35/1e-6)**2}
+
+# Fixed densitized-current variation: include determinant and normalization.
+g = np.diag([-1.,1.,1.,1.])
+J = np.array([1.2,.2,.1,0.])
+dg = np.array([[.1,.03,0,0],[.03,-.04,.02,0],[0,.02,.05,0],[0,0,0,-.02]])
+def fluid(metric):
+    density = np.sqrt(-J@metric@J)/np.sqrt(-np.linalg.det(metric))
+    velocity = J/(np.sqrt(-np.linalg.det(metric))*density)
+    return density, velocity
+density, velocity = fluid(g)
+expected_dn = -density/2*np.sum((np.linalg.inv(g)+np.outer(velocity,velocity))*dg)
+expected_du = velocity/2*(velocity@dg@velocity)
+step = 1e-5
+plus, minus = fluid(g+step*dg), fluid(g-step*dg)
+err_n = abs((plus[0]-minus[0])/(2*step)-expected_dn)
+err_u = np.max(abs((plus[1]-minus[1])/(2*step)-expected_du))
+assert err_n < 1e-9 and err_u < 1e-9
+out['fixed_current'] = {'density_derivative_abs_error': float(err_n),
+                         'velocity_derivative_max_abs_error': float(err_u)}
+
+# Synthetic compact-support projection: j=w0=1, phi=r^2(1-r)^4.
+# H[phi]=(r^4 phi')'; boundary flux and weighted integral vanish.
+phi = np.polynomial.Polynomial([0,0,1,-4,6,-4,1])
+r4 = np.polynomial.Polynomial([0,0,0,0,1])
+Hphi = (r4*phi.deriv()).deriv()
+projection = quad(Hphi,0,1,epsabs=1e-12)[0]
+assert abs(projection)<1e-12 and abs(Hphi(.5))>1e-4
+out['synthetic_projection'] = {'integral': projection,
+                                'local_source_at_half': Hphi(.5),
+                                'scope': 'boundary cancellation illustration; not a stellar rerun'}
+print(json.dumps(out,indent=2))
+\end{Verbatim}
+
+\chapter{Selected original audit code}
+These four original programs were rerun successfully. They are included verbatim below and retained as separate files in the source archive. Their passing assertions certify only their stated mathematical tests.
+\section{Local tensor spectrum}
+\noindent\path{tpv_tensor_stability_audit.py}\par
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+#!/usr/bin/env python3
+"""Linear TT-mode stability screen for phenomenological matter-gated TPV.
+
+Model: in a locally flat, fluid-rest patch with a prescribed static gate Gamma(z),
+L^(2) = M_Pl^2/4 * [h_t^2 - h_z^2 + lambda*Gamma(z)*h_tz^2],
+lambda=alpha_B/Lambda_Q^2 (geometrized units, km^2).
+
+The PDE is [1-lambda*d_z(Gamma*d_z)] h_tt - h_zz = 0.
+This is a diagnostic of the transverse-traceless tensor sector only, and is
+NOT a strong-hyperbolicity/stability proof for the unrestricted metric-fluid theory.
+
+A relativistic polytrope TOV profile supplies an illustrative Gamma(r) on 0<r<R;
+we treat this radial gate as a 1D flat-medium profile with Dirichlet boundaries.
+This is NOT the spherical axial stellar perturbation equation.
+"""
+import argparse
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.sparse import diags, csc_matrix
+from scipy.sparse.linalg import eigsh
+
+K_POLYTROPE=180.0
+N_C=0.001
+LAMBDA_Q_SQ=0.059333
+D_MINUS,D_PLUS,ZETA_STAR=1e-11,5e-9,0.08
+C_KM_S=299792.458
+
+def stellar_gate_profile():
+    r0=1e-5
+    pc=K_POLYTROPE*N_C**2
+    ec=N_C+pc
+    def rhs(r,y):
+        m,p=y
+        p=max(float(p),0.)
+        e=np.sqrt(p/K_POLYTROPE)+p
+        grav=(m+4*np.pi*r**3*p)/(r*(r-2*m))
+        return [4*np.pi*r*r*e,-(e+p)*grav]
+    def surface(r,y):return y[1]
+    surface.terminal=True;surface.direction=-1
+    sol=solve_ivp(rhs,(r0,30.),[4*np.pi*ec*r0**3/3,pc],rtol=1e-11,atol=1e-13,max_step=0.01,events=surface,dense_output=True)
+    if not sol.success or len(sol.t_events[0])!=1: raise RuntimeError('TOV surface not found')
+    R=float(sol.t_events[0][0])
+    def gamma(r):
+        rr=np.clip(np.atleast_1d(r),r0,R)
+        p=np.maximum(sol.sol(rr)[1],0.)
+        e=np.sqrt(p/K_POLYTROPE)+p
+        q=np.divide(p,e,where=e>0,out=np.zeros_like(p))
+        D=(8*np.pi*e)**4*q**3
+        zeta=(1-3*q)**2/(1+3*q*q)
+        low=np.full_like(D,np.inf)
+        np.divide(D_MINUS,D,out=low,where=D>0)
+        return np.exp(-np.log(2)*(low**.4+(D/D_PLUS)**.4+(ZETA_STAR/zeta)**4))
+    return R,gamma
+
+def modes(n,alpha,number=5):
+    R,gamma=stellar_gate_profile()
+    dx=R/(n+1)
+    # N+1 edges, N interior degrees of freedom. D contains Dirichlet BC.
+    g=gamma((np.arange(n+1)+0.5)*dx)
+    # Stiffness (negative Laplacian) with Dirichlet BC
+    off=-np.ones(n-1)/dx**2
+    K=diags([off,np.ones(n)*2/dx**2,off],[-1,0,1],format='csc')
+    # edge weighted derivative D^T G D, symmetric and PSD
+    C=diags([(g[:-1]+g[1:])/dx**2,-g[1:-1]/dx**2,-g[1:-1]/dx**2], [0,-1,1],shape=(n,n),format='csc')
+    # verify C exact by diagonal: at interior node j, weights edge j and j+1.
+    lam=alpha/LAMBDA_Q_SQ
+    M=diags(np.ones(n),0,format='csc')+lam*C
+    # sigma shift-invert targets the lowest eigenvalues of the generalized SPD pencil.
+    values,_=eigsh(K,k=number,M=M,sigma=0.0,which='LM',tol=1e-10)
+    values=np.sort(values)
+    k_gr=np.arange(1,number+1)*np.pi/R
+    return {'R':R,'max_gamma':np.max(g),'lam':lam,
+            'eigenvalues':values,'wave_numbers':np.sqrt(values),
+            'ratios':np.sqrt(values)/k_gr,
+            'mass_lower_bound':1.0 if alpha>=0 else None,
+            'gate':g,'dx':dx,'M':M,'K':K}
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--n',type=int,default=600);args=parser.parse_args()
+    for alpha in [0,0.005,0.05]:
+        a=modes(args.n,alpha)
+        print('ALPHA',alpha,'R',a['R'],'GAMMA_MAX',a['max_gamma'],'LAMBDA_KM2',a['lam'])
+        print('MODES',[(i+1,round(float(v),10),round(float(r),10)) for i,(v,r) in enumerate(zip(a['wave_numbers'],a['ratios']))])
+        if alpha>=0:
+            # Strict diagonal dominance gives a *rigorous lower bound* of 1.
+            M=a['M']
+            offsum=np.asarray(abs(M).sum(axis=1)).ravel()-abs(M.diagonal())
+            lower=float(np.min(M.diagonal()-offsum))
+            print('MASS_OPERATOR_GERSHGORIN_LOWER_BOUND',lower)
+            assert lower>0.999
+        assert np.all(a['eigenvalues']>0)
+    small=modes(args.n,0.005)
+    large=modes(args.n,0.05)
+    assert np.all(small['ratios']<=1+1e-8)
+    assert np.all(large['ratios']<=small['ratios']+1e-8)
+    print('RESULT: LOCAL TT SCREEN PASS FOR ALPHA>=0; FULL METRIC-FLUID SYSTEM OPEN')
+if __name__=='__main__':main()
+
+\end{Verbatim}
+\section{Local Gauss constraints and frame topology}
+\noindent\path{mainTPV_local_constraint_topology_audit_20261009.py}\par
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+"""Independent exact/numerical diagnostics for local Spin(10) collective TPV toy models.
+All statements are about conditional site/frame or gauged lattice models, NOT derived TPV.
+"""
+import numpy as np
+from scipy.linalg import expm
+from math import comb
+N=10
+rng=np.random.default_rng(20261009)
+
+def skew(i,j):
+    X=np.zeros((N,N)); X[i,j]=1; X[j,i]=-1; return X
+
+def wedge(q,w):
+    return np.outer(q,w)-np.outer(w,q)
+
+# 1. Bare site interaction: local charges initially zero but fail preservation.
+q1=np.eye(N)[0].copy(); q2=np.eye(N)[1].copy(); p1=np.zeros(N);p2=np.zeros(N)
+kappa=1.7
+# H_int = kappa/2 ||q1-q2||^2; Hamilton qdot=p, pdot=-grad H.
+g1dot=wedge(q1, -kappa*(q1-q2))
+g2dot=wedge(q2, -kappa*(q2-q1))
+assert np.isclose(g1dot[0,1],kappa)
+assert np.isclose(g2dot[0,1],-kappa)
+assert np.max(np.abs(g1dot+g2dot))<1e-13
+
+# 2. Correctly transforming independent orthogonal link, fixed-norm rotations.
+A=rng.normal(size=(N,N)); B=rng.normal(size=(N,N)); C=rng.normal(size=(N,N))
+O1=expm((A-A.T)/4); O2=expm((B-B.T)/4);U=expm((C-C.T)/4)
+qa=rng.normal(size=N); qb=rng.normal(size=N)
+E_before=.5*kappa*np.linalg.norm(qa-U@qb)**2
+E_after=.5*kappa*np.linalg.norm(O1@qa-(O1@U@O2.T)@(O2@qb))**2
+err=abs(E_before-E_after)
+assert err<1e-12
+
+# 3. Rank C_m of wedge map (sum_i e_i wedge dq_i), exact stable integer matrices.
+pairs=[(i,j) for i in range(N) for j in range(i+1,N)]
+def rank_for(m):
+    C=np.zeros((len(pairs),N*m))
+    for c,(i,j) in enumerate(pairs):
+        for a in range(m):
+            # coefficient of delta q^j * v^i - delta q^i * v^j
+            C[c,a*N+j]+=(a==i)
+            C[c,a*N+i]-=(a==j)
+    return np.linalg.matrix_rank(C)
+ranks=[rank_for(m) for m in range(1,11)]
+expected=[45-(10-m)*(9-m)//2 if m<=9 else 45 for m in range(1,11)]
+assert ranks==expected,(ranks,expected)
+
+# 4. Linearized 3D gauge sector standard lattice benchmark, NOT TPV prediction.
+# For dimensionless lattice momentum in reciprocal lattice, ktilde_i=2sin(k_i/2).
+for k in [(np.pi/2,0,0),(np.pi/2,np.pi/2,0),(np.pi/2,np.pi/2,np.pi/2)]:
+    kt=2*np.sin(np.array(k)/2)
+    M=(kt@kt)*np.eye(3)-np.outer(kt,kt)
+    vals=np.linalg.eigvalsh(M)
+    assert abs(vals[0])<1e-13
+    assert max(abs(vals[1:]-(kt@kt)))<1e-13
+    print('lattice k=',k,'magnetic Hessian eigenvalues=',vals,'positive transverse Spin(10) modes=',45*2)
+
+# 5. Gauge-orbit classification: G=Q^T Q invariant under SO10 local rotation.
+Q=rng.normal(size=(10,9)); Q[:, :9]+=np.eye(10,9)
+G=Q.T@Q
+Qp=O1@Q
+assert np.linalg.norm(Qp.T@Qp-G)<1e-12
+L=np.linalg.cholesky(G)
+assert np.linalg.eigvalsh(G).min()>0
+
+print('local constraint derivative G1_01=',g1dot[0,1],'G2_01=',g2dot[0,1], 'total=',(g1dot+g2dot)[0,1])
+print('gauged link coupling invariance error=',err)
+print('collective wedge ranks (m=1..10)=',ranks)
+print('nine-frame Gram SPD9 eigenvalue minimum=',np.linalg.eigvalsh(G).min())
+print('Conclusions: site-only coupling fails local Gauss preservation; independent link restores symmetry BY ASSUMPTION; Gaussian gauge benchmark has 90 physical transverse modes per nonzero momentum; pure nine-frame quotient is SPD9.')
+
+# 6. Two-level leakage control: a finite Gauss gap does not enforce exact Gauss.
+for alpha,t in [(1.0,1.0),(1.0,0.1),(10.0,1.0)]:
+    Delta=8*alpha
+    K=np.array([[0.0,t],[t,Delta]])
+    E,vec=np.linalg.eigh(K)
+    pcharged=float(vec[1,0]**2)
+    formula=0.5*(1-Delta/np.sqrt(Delta**2+4*t*t))
+    assert np.isclose(pcharged,formula,atol=1e-14)
+    print('alpha=',alpha,'mixing t=',t,'charged admixture=',pcharged)
+
+\end{Verbatim}
+\section{Exact Berry-curvature rank certificate}
+\noindent\path{mainTPV_Berry_exact_modular_certificate_20261009.py}\par
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+"""Exact finite-field rank certificate: all 270 curvature components are locally free for r=8.
+
+B[mu,a,i] integer. F[mu nu,ij] = sum_a(B[mu,a,i]B[nu,a,j]
+                                    - B[nu,a,i]B[mu,a,j]).
+The Jacobian J is 270x320 integer. Full row-rank mod a prime proves
+full rank over the rationals/reals and local surjectivity at that B.
+"""
+import numpy as np
+import hashlib
+from itertools import combinations
+r=8;n=10;p=101
+B=np.random.default_rng(20261009).integers(-2,3,size=(4,r,n),dtype=np.int64)
+J=np.zeros((6*45,4*r*n),dtype=np.int64)
+row=0
+for mu,nu in combinations(range(4),2):
+    for i,j in combinations(range(10),2):
+        for a in range(r):
+            J[row, (mu*r+a)*n+i] += B[nu,a,j]
+            J[row, (mu*r+a)*n+j] -= B[nu,a,i]
+            J[row, (nu*r+a)*n+i] -= B[mu,a,j]
+            J[row, (nu*r+a)*n+j] += B[mu,a,i]
+        row+=1
+# Gaussian elimination, one column at a time, over F_p.
+A=J.copy()%p
+rows,cols=A.shape
+rank=0
+pivots=[]
+for col in range(cols):
+    found=np.flatnonzero(A[rank:,col]) if rank<rows else []
+    if len(found)==0:continue
+    pivot_row=rank+int(found[0]);A[[rank,pivot_row]]=A[[pivot_row,rank]]
+    inv=pow(int(A[rank,col]),-1,p)
+    A[rank,col:] = A[rank,col:]*inv%p
+    if rank+1<rows:
+        factors=A[rank+1:,col].copy()
+        A[rank+1:,col:] = (A[rank+1:,col:]-factors[:,None]*A[rank,col:])%p
+    pivots.append(col)
+    rank+=1
+    if rank==rows:break
+assert rank==270,(rank,pivots)
+assert len(pivots)==270
+print('Exact field: F_',p,sep='')
+print('Integer source B shape:',B.shape,'source SHA256:',hashlib.sha256(B.tobytes()).hexdigest())
+print('Jacobian shape:',J.shape)
+print('Exact modular rank:',rank,'of',rows)
+print('Independent columns selected:',len(pivots),'last selected index:',pivots[-1])
+print('Jacobian SHA256:',hashlib.sha256(J.tobytes()).hexdigest())
+print('Algebraic conclusion: integer Jacobian rank 270 over Q and R at this B; submersion theorem gives locally open set of field strengths.')
+
+\end{Verbatim}
+\section{Full affine connection Hessian}
+\noindent\path{mainTPV_full_affine_hessian_audit_20261009.py}\par
+\begin{Verbatim}[breaklines=true,breakanywhere=true,fontsize=\scriptsize]
+#!/usr/bin/env python3
+"""Vacuum 4D Einstein-Palatini affine Hessian and projective curvature audit.
+Conventions: Gamma^l_{r m}; flat Euclidean metric; independent 64 distortion components.
+This is the algebraic connection Hessian, not the full gravitational dynamical Hessian.
+"""
+import numpy as np
+from itertools import product
+from fractions import Fraction
+
+D=4
+idx=list(product(range(D),repeat=3))
+assert len(idx)==64
+basis=[]
+for k in range(64):
+ c=np.zeros((D,D,D),dtype=int)
+ c[idx[k]]=1
+ basis.append(c)
+
+def q(c):
+    tr_left=np.einsum('lsl->s',c)
+    tr_right=np.einsum('srr->s',c)
+    return int(tr_left@tr_right-np.einsum('lsr,srl->',c,c))
+
+K=np.zeros((64,64),dtype=np.int64)
+for i in range(64):
+ K[i,i]=2*q(basis[i])
+ for j in range(i):
+  K[i,j]=K[j,i]=q(basis[i]+basis[j])-q(basis[i])-q(basis[j])
+
+def modrank(m,p=101):
+ m=np.asarray(m).astype(np.int64).copy()%p
+ nrow,ncol=m.shape; r=0
+ for j in range(ncol):
+  pivot=next((i for i in range(r,nrow) if m[i,j]),None)
+  if pivot is None: continue
+  m[[r,pivot]]=m[[pivot,r]]
+  m[r]=(m[r]*pow(int(m[r,j]),-1,p))%p
+  for i in range(r+1,nrow):
+   if m[i,j]: m[i]=(m[i]-m[i,j]*m[r])%p
+  r+=1
+  if r==nrow: break
+ return r
+
+# Projective vectors C^l_{r m}=delta^l_r A_m.
+V=np.zeros((64,D),dtype=np.int64)
+for a in range(D):
+ for l in range(D):
+  V[idx.index((l,l,a)),a]=1
+s=np.linalg.eigvalsh(K.astype(float))
+print('K shape',K.shape)
+print('K exact-rank mod 101',modrank(K),'nullity',64-modrank(K))
+print('K Euclidean eig signs',sum(s < -1e-8),sum(abs(s)<=1e-8),sum(s>1e-8))
+print('K extremal eig',s[0],s[-1])
+print('projective coupling max |K V|',np.max(abs(K@V)))
+print('projective norm VtV diag',np.diag(V.T@V))
+print('sum-projective coeff q', [q(V[:,a].reshape(D,D,D)) for a in range(D)])
+
+# Distortion trace T_mu = C^l_{l mu} has 4 A_mu, so homothetic curvature is dT=4dA.
+T=np.zeros((D,64),dtype=int)
+for a in range(D):
+ for l in range(D): T[a,idx.index((l,l,a))]+=1
+print('trace on projective T @ V=',T@V)
+print('projective modrank',modrank(V),'trace-free section dimension',64-modrank(T))
+
+# Check that EH quadratic form is independent of trace-free distortions off shell but
+# nondegenerate on complement after quotienting four projective zero directions.
+# K nullspace exactly span V if rank=60 and K V=0.
+assert modrank(K)==60 and np.array_equal(K@V,np.zeros((64,4),dtype=int))
+assert np.array_equal(T@V,4*np.eye(4,dtype=int))
+
+# Fourier kinetic Q=dT in the projective sector, k=(1,2,3,4):
+k=np.array([1,2,3,4])
+P=np.eye(4)-np.outer(k,k)/np.dot(k,k)
+Kproj=(k@k)*P
+print('Q-dynamics gauge mode residual',np.linalg.norm(Kproj@k))
+print('Q-dynamics spectrum g_p=1, local',np.linalg.eigvalsh(Kproj))
+print('All affine nonprojective components algebraic, no kinetic from Q if trace-free')
+
+\end{Verbatim}
+\chapter{Checkpoint reproduction and nonlinear scan outcomes}
+\label{app:checkpoint-results}
+The portable wrapper \path{TPV_checkpoint_audit.py} executes the three preserved checkpoint scripts, redirecting only their historical \path{/mnt/data} paths into a package-local run directory. It supplies the recovered fixed-reference auxiliary JSON, compares the two earlier audits with their attached outputs, reruns the full 30-point nonlinear grid, and verifies the reflection-symmetric throat statement symbolically. It does not repair the scientific model or choose new parameters.
+
+The reproduction used NumPy 2.3.5, SciPy 1.17.0, and SymPy 1.14.0. Both earlier audits match all recorded numerical values exactly. The nonlinear scan matches all terminal radii and event classifications; its maximum local throat residual is $1.5544\times10^{-15}$. Reproducibility of the code is a different claim from global existence, convergence under refinement, or Lorentzian stability.
+
+\section{Complete reported scan, reproduced by this edition}
+L denotes the $N=0.02$ cutoff, S the $|\phi|=8$ cutoff, and M the static radial-matrix smallest-singular-value threshold of $10^{-8}$. The last column is the source script's maximum sampled absolute radial constraint residual, in its equation normalization. Every row has solver \texttt{success=true} because its termination event was detected. No row is a completed global solution.
+\begin{longtable}{rrrrcr}
+\toprule $\eta$ & $d$ & Terminal $\rho$ & Terminal $N$ & Event & Sampled $|\mathcal C|_{\max}$\\\midrule\endhead
+0.00 & -2 & 5.795539 & 0.020000 & L & $2.86\times10^{-9}$\\
+0.00 & -1 & 5.758104 & 0.020000 & L & $4.41\times10^{-9}$\\
+0.00 & -0.5 & 5.737471 & 0.020000 & L & $4.12\times10^{-9}$\\
+0.00 & -0.2 & 5.722809 & 0.020000 & L & $4.28\times10^{-9}$\\
+0.00 & 0 & 5.710783 & 0.020000 & L & $6.13\times10^{-9}$\\
+0.00 & 0.2 & 5.695266 & 0.020000 & L & $3.67\times10^{-9}$\\
+0.00 & 0.5 & 5.661474 & 0.020000 & L & $5.46\times10^{-8}$\\
+0.00 & 1 & 5.687214 & 0.020000 & L & $4.36\times10^{-7}$\\
+0.00 & 2 & 6.612452 & 0.053647 & S & $2.94\times10^{-4}$\\
+0.00 & 4 & 6.747060 & 0.146134 & S & $3.42\times10^{-4}$\\
+0.05 & -2 & 5.853846 & 0.020000 & L & $3.68\times10^{-9}$\\
+0.05 & -1 & 5.839306 & 0.020000 & L & $9.82\times10^{-9}$\\
+0.05 & -0.5 & 5.832159 & 0.020000 & L & $1.19\times10^{-8}$\\
+0.05 & -0.2 & 5.827885 & 0.020000 & L & $9.31\times10^{-9}$\\
+0.05 & 0 & 5.825031 & 0.020000 & L & $5.24\times10^{-9}$\\
+0.05 & 0.2 & 5.822165 & 0.020000 & L & $4.91\times10^{-9}$\\
+0.05 & 0.5 & 5.817817 & 0.020000 & L & $5.23\times10^{-9}$\\
+0.05 & 1 & 5.810299 & 0.020000 & L & $5.89\times10^{-9}$\\
+0.05 & 2 & 5.791814 & 0.020000 & L & $1.59\times10^{-8}$\\
+0.05 & 4 & 5.871659 & 0.020000 & L & $6.31\times10^{-7}$\\
+0.10 & -2 & 2.541640 & 0.778530 & M & $1.45\times10^{-12}$\\
+0.10 & -1 & 2.668309 & 0.756967 & M & $4.02\times10^{-14}$\\
+0.10 & -0.5 & 2.741444 & 0.744128 & M & $3.34\times10^{-14}$\\
+0.10 & -0.2 & 2.788800 & 0.735666 & M & $4.46\times10^{-14}$\\
+0.10 & 0 & 2.821862 & 0.729691 & M & $4.77\times10^{-14}$\\
+0.10 & 0.2 & 2.856107 & 0.723443 & M & $3.50\times10^{-14}$\\
+0.10 & 0.5 & 2.909565 & 0.713574 & M & $4.54\times10^{-14}$\\
+0.10 & 1 & 3.002538 & 0.696082 & M & $5.34\times10^{-14}$\\
+0.10 & 2 & 0.760080 & 0.977836 & M & $4.79\times10^{-14}$\\
+0.10 & 4 & 0.623216 & 0.984942 & M & $1.64\times10^{-13}$\\
+\bottomrule\end{longtable}
+The two S rows have degraded residuals at late stages. The M rows need not imply a physical singularity: singular values depend on the static equation representation, and the complete constrained Lorentzian characteristic system has not been computed. Similarly, L is a finite-lapse cutoff, not a demonstrated horizon. The full trajectories and convergence studies needed to strengthen these interpretations are not supplied by this table.
+
+\section{Preserved inputs and limits}
+The nine uploaded checkpoint files are preserved unchanged under \path{supplements/}. The recovered \path{mainTPV_coupled_throat_auxiliary_BVP_results_20261009.json} is preserved under \path{dependencies/}. The wrapper, summary JSON, dependency versions, and captured run logs accompany the manuscript. The original fixed-reference BVP solution is treated as an input; reproducing its use does not independently validate its construction. The checkpoint's separate one-auxiliary collocation failures remain reported results because their implementation was not supplied here.
+
+\begin{Verbatim}[breaklines=true,fontsize=\small]
+python3 -m pip install -r requirements_checkpoints.txt
+python3 TPV_checkpoint_audit.py
+\end{Verbatim}
+
+The cross-check between the first two checkpoints yields $\xi=0.076305$ and high-gradient coefficient $-6.015238776$ for the earlier Kretschmann lock under its ultrastatic homothetic calibration. The nonlinear EsGB scan uses a different action and lapse. The reproduction wrapper records this scope restriction explicitly.
+
+
+\chapter{Source coverage and reproducibility map}
+The companion CSV inventory records downloaded filenames, source identities, byte lengths, SHA-256 hashes, and duplicate groups. The archive retains one copy of each distinct downloaded content, the full inventory, the thesis source, and validation logs. Inventory or preservation does not imply exhaustive line-by-line review or successful execution.
+\section{Coverage gaps}
+Full original exports for every later TPV, cTPV, aTPV, and electrogravity chat were not established. The supplementary monograph extends the laboratory and inverse-source coverage, but the anomaly chapter remains a scoped theoretical synthesis, not a complete reconstruction of all experiments discussed. The historical numerical BVP trajectories, every flavor-table generator, unrestricted mixed-shell transition amplitudes, full geon mesh data, and complete active merger data are not established as a self-contained reproducible dataset. Some archived scripts contain absolute paths to older execution environments or missing imports. They have been preserved without silently repairing their scientific assumptions.
+\section{Principal sources by topic}
+\subsection{Early localization and core construction}
+\noindent\path{Pasted text.txt}\par
+\noindent\path{Pasted markdown(8).md}\par
+\noindent\path{TPV_Z2_Topological_Fermion_Current_Model_v3_9_updated.pdf}\par
+\noindent\path{tpv-chat-2.pdf}\par
+\noindent\path{tpv-chat-3.pdf}\par
+\noindent\path{tpv-chat-4.pdf}\par
+\subsection{Geon development and common kernel}
+\noindent\path{tpv-chat-5.pdf}\par
+\noindent\path{tpv-chat-6.pdf}\par
+\noindent\path{tpv-chat-7.pdf}\par
+\noindent\path{tpv-chat-8.pdf}\par
+\noindent\path{tpv-chat-9.pdf}\par
+\noindent\path{tpv-chat-10.pdf}\par
+\noindent\path{tpv_common_kernel_d5_manuscript.tex}\par
+\subsection{Active gravity and numerical relativity}
+\noindent\path{TPV_unified_manuscript.tex}\par
+\noindent\path{TPV_merger_numerical_relativity.tex}\par
+\noindent\path{TPV_Noether_source_correction.md}\par
+\noindent\path{TPV_current_Ward_and_angular_action_checkpoint.md}\par
+\noindent\path{TPV_axial_action_projection_checkpoint_2026-10-08.md}\par
+\noindent\path{TPV_tensor_stability_checkpoint_2026-10-09.md}\par
+\subsection{Torsion and the later lattice history}
+\noindent\path{cTPV7print.pdf}\par
+\noindent\path{mainTPV.pdf}\par
+\noindent\path{mainTPVprint.pdf}\par
+\noindent\path{Pasted text(1).txt}\par
+\noindent\path{mainTPV_YangMills_normalization_and_continuum_checkpoint_2026-10-09.md}\par
+\subsection{Reconciled lattice coefficients}
+\noindent\path{mainTPV_spin10_2026-10-09_mixed_pair_archive_reconciliation.md}\par
+\noindent\path{mainTPV_spin10_mixed_sixth_spectral_checkpoint_20261009.md}\par
+\noindent\path{mainTPV_2026-10-09_mixed_shell_sign_and_gauge_emergence_checkpoint.md}\par
+\noindent\path{mainTPV_spin10_exact_auxiliary_response_checkpoint_20261009.md}\par
+\subsection{Gauge emergence and geometric memory}
+\noindent\path{mainTPV_metric_and_Berry_curvature_checkpoint_20261009.md}\par
+\noindent\path{mainTPV_local_gauss_spinor_topology_checkpoint_20261009.md}\par
+\noindent\path{mainTPV_nonabelian_affine_collective_checkpoint_20261009.md}\par
+\noindent\path{mainTPV_active_nonlocal_metric_affine_checkpoint_20261009.md}\par
+\noindent\path{mainTPV_full_affine_and_causal_memory_checkpoint_20261009.md}\par
+\subsection{Version 0.2 supplemental sources}
+\noindent\path{TPV_Dissertation_Research_Monograph_2026(1).pdf}\par
+\noindent\path{tpv_common_kernel_d5_manuscript(1).tex}\par
+The PDF supplies the added discussion and reported local variation tests. Its Appendix B preserves further audit listings; those listings are not silently presented as newly executed in this edition. The attached D5 TeX file is a confirmed duplicate of the source already incorporated. The supplemental manifest and change log distinguish these attachments from the original retrieved inventory.
+
+\subsection{Version 0.3 checkpoint sources}
+\noindent\path{mainTPV_geometric_locking_covariant_completion_checkpoint_20261009(1).md}\par
+\noindent\path{mainTPV_D5_tensor_spectral_parent_checkpoint_20261009(1).md}\par
+\noindent\path{mainTPV_nonlinear_sGB_research_checkpoint_20261009(1).md}\par
+Each is accompanied by its original Python audit and JSON results in the supplemental manifest. The auxiliary BVP results dependency is recorded separately with its retrieved version and content hash. No claim of complete retrieval of the intervening chat is made.
+
+\section{Compilation and run instructions}
+The TeX document is self-contained: no external figures, bibliography file, or code inputs are required. Compile twice with pdfLaTeX to resolve the table of contents and references. Run the independent audit using Python 3 with NumPy and SciPy. The version 0.3 checkpoint wrapper requires SymPy in addition to NumPy and SciPy and must be run from the extracted research package. Original archived programs outside that wrapper have their own dependencies and are not all portable without reconstructing their original environment.
+\begin{Verbatim}[breaklines=true]
+pdflatex -interaction=nonstopmode -halt-on-error TPV_Thesis.tex
+pdflatex -interaction=nonstopmode -halt-on-error TPV_Thesis.tex
+python3 TPV_thesis_audit.py
+python3 TPV_revision_audit.py
+python3 TPV_checkpoint_audit.py
+\end{Verbatim}
+\section{Authorship and evidential responsibility}
+The research program is attributed to Jacob G. Simmerman. This consolidated draft was compiled with AI assistance from the retrieved records; selected code was rerun and a compact independent audit was written. It has not undergone doctoral examination, peer review, or a complete independent verification of every historical derivation. Authorship, institutional formatting, acknowledgments, and any submission-specific AI disclosure should be finalized before external submission.
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Selected external methodological references}
+\bibitem{Brown} J. D. Brown, ``Action functionals for relativistic perfect fluids,'' Class. Quantum Grav. \textbf{10}, 1579 (1993), \href{https://arxiv.org/abs/gr-qc/9304026}{arXiv:gr-qc/9304026}.
+\bibitem{ParkerSimon} L. Parker and J. Z. Simon, ``Einstein equation with quantum corrections reduced to second order,'' Phys. Rev. D \textbf{47}, 1339 (1993), \href{https://doi.org/10.1103/PhysRevD.47.1339}{doi:10.1103/PhysRevD.47.1339}.
+\bibitem{AucklySpeight} D. Auckly and M. Speight, ``Fermionic quantization and configuration spaces for the Skyrme and Faddeev--Hopf models,'' \href{https://arxiv.org/abs/hep-th/0411010}{arXiv:hep-th/0411010} (2004).
+\bibitem{CalcagniMercuri} G. Calcagni and S. Mercuri, ``Barbero--Immirzi field in canonical formalism of pure gravity,'' Phys. Rev. D \textbf{79}, 084004 (2009), \href{https://doi.org/10.1103/PhysRevD.79.084004}{doi:10.1103/PhysRevD.79.084004}.
+\bibitem{KogutSusskind} J. Kogut and L. Susskind, ``Hamiltonian formulation of Wilson's lattice gauge theories,'' Phys. Rev. D \textbf{11}, 395 (1975), \href{https://doi.org/10.1103/PhysRevD.11.395}{doi:10.1103/PhysRevD.11.395}.
+\bibitem{Biswas} T. Biswas, E. Gerwick, T. Koivisto, and A. Mazumdar, ``Towards singularity- and ghost-free theories of gravity,'' Phys. Rev. Lett. \textbf{108}, 031101 (2012), \href{https://arxiv.org/abs/1110.5249}{arXiv:1110.5249}.
+\bibitem{Percacci} R. Percacci and E. Sezgin, ``New class of ghost- and tachyon-free metric affine gravities,'' Phys. Rev. D \textbf{101}, 084040 (2020), \href{https://doi.org/10.1103/PhysRevD.101.084040}{doi:10.1103/PhysRevD.101.084040}.
+\bibitem{PercacciErratum} R. Percacci and E. Sezgin, Erratum to the preceding article, Phys. Rev. D \textbf{111}, 109902 (2025), \href{https://doi.org/10.1103/PhysRevD.111.109902}{doi:10.1103/PhysRevD.111.109902}.
+\end{thebibliography}
+\end{document}
